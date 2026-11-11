@@ -12,14 +12,6 @@ const images = {
   stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
 };
 
-const portfolio = [
-  {
-    title: "Festival Ruido Rosa",
-    place: "Santiago, Chile",
-    date: "24 AGO 2024",
-    type: "tocatas",
-    image: images.main,
-  },
 
 const portfolio = [
   {
