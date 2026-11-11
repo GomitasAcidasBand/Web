@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 // Imágenes
 import mainPortada from "./media1/4.jpg";
 import main1 from "./media1/1.jpg";
@@ -20,31 +21,31 @@ const images = {
 };
 
 const epTracks = [
-  { 
-    number: "01", 
-    title: "No volverás", 
-    duration: "02:50", 
+  {
+    number: "01",
+    title: "No volverás",
+    duration: "02:50",
     file: cancion3,
     lyrics: "Te miro, intento comprender que no regresarás.\nTe pienso todo el tiempo pero sé que ya no volverás.\n\nYo solo quiero escapar de esta mierda de soledad,\ny quizás, encontrar la respuesta a esta casualidad.\n\nNo entiendo lo que siento, pero sé que ya no te quiero más.\nPretendo romper el juego en el que tú no sabías amar.\n\nYo solo quiero escapar de esta mierda de soledad,\ny quizás, encontrar la respuesta a esta casualidad."
   },
-  { 
-    number: "02", 
-    title: "Despertar", 
-    duration: "03:42", 
+  {
+    number: "02",
+    title: "Despertar",
+    duration: "03:42",
     file: cancion1,
     lyrics: "Comienzo a despertar de este sueño mortal\ny cuando me levanto puedo ver lo linda que estás.\n\nDifícil es volver a ser como era antes,\nque cuando te veía sonreía y estaba bien."
   },
-  { 
-    number: "03", 
-    title: "Mariposas", 
-    duration: "03:15", 
+  {
+    number: "03",
+    title: "Mariposas",
+    duration: "03:15",
     file: cancion2,
     lyrics: "Tú, y tus ojos me cautivan me hacen ver\nque el amor no tendría que doler.\n\nY pasa el tiempo y aún te quiero,\nlas mariposas vuelan,\nlas mariposas vuelan.\n\nOtra vez, otra vez."
   },
-  { 
-    number: "04", 
-    title: "Trágico amor", 
-    duration: "03:30", 
+  {
+    number: "04",
+    title: "Trágico amor",
+    duration: "03:30",
     file: cancion4,
     lyrics: "Podríamos volver a intentarlo más.\nY al final, no bastaría.\n\nY tal vez, no odiemos más,\ny tal vez, nos dañemos más.\n\nMe asfixia, este trágico amor.\nTrágico amor, trágico - trágico amor.\n\nNos odiemos más y tal vez,\nnos dañemos más.\n\nTrágico amor."
   },
@@ -120,29 +121,15 @@ function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "
     prev: <path d="M8 7h2v10H8zm3 5 7-5v10l-7-5Z" fill="currentColor" />,
     next: <path d="M16 7h-2v10h2zm-3 5L6 7v10l7-5Z" fill="currentColor" />,
     heart: (
-      <path
-        d="M12 19s-7-4.1-7-9a4 4 0 0 1 7-2.3A4 4 0 0 1 19 10c0 4.9-7 9-7 9Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
+      <path d="M12 19s-7-4.1-7-9a4 4 0 0 1 7-2.3A4 4 0 0 1 19 10c0 4.9-7 9-7 9Z" fill="none" stroke="currentColor" strokeWidth="1.8" />
     ),
     mail: (
       <>
-        <rect
-          x="4"
-          y="6"
-          width="16"
-          height="12"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-        />
+        <rect x="4" y="6" width="16" height="12" fill="none" stroke="currentColor" strokeWidth="1.7" />
         <path d="m5 7 7 6 7-6" fill="none" stroke="currentColor" strokeWidth="1.7" />
       </>
     ),
   };
-
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       {paths[name]}
@@ -157,12 +144,15 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
   useEffect(() => {
     const player = refAudio.current;
     if (!player) return;
+
     const update = () => setProgress((player.currentTime / (player.duration || 1)) * 100);
     const handleEnded = () => {
       onTrackEnd();
     };
+
     player.addEventListener("timeupdate", update);
     player.addEventListener("ended", handleEnded);
+
     return () => {
       player.removeEventListener("timeupdate", update);
       player.removeEventListener("ended", handleEnded);
@@ -182,11 +172,7 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
 
   return (
     <section className="module music-module" id="musica">
-      <audio
-        ref={refAudio}
-        src={activeTrack.file}
-        preload="metadata"
-      />
+      <audio ref={refAudio} src={activeTrack.file} preload="metadata" />
       <h2 className="module-title">EP "Dulces Sueños"</h2>
       <div className="music-screen">
         <p>NOW PLAYING ({activeTrack.number}/04):</p>
@@ -198,8 +184,7 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
         onClick={(event) => {
           if (!refAudio.current?.duration) return;
           const rect = event.currentTarget.getBoundingClientRect();
-          refAudio.current.currentTime =
-            ((event.clientX - rect.left) / rect.width) * refAudio.current.duration;
+          refAudio.current.currentTime = ((event.clientX - rect.left) / rect.width) * refAudio.current.duration;
         }}
       >
         <i style={{ width: `${progress}%` }} />
@@ -208,11 +193,7 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
         <button aria-label="Canción anterior" onClick={onPrev}>
           <Icon name="prev" />
         </button>
-        <button
-          className="main-control"
-          onClick={toggle}
-          aria-label={playingParent ? "Pausar" : "Reproducir"}
-        >
+        <button className="main-control" onClick={toggle} aria-label={playingParent ? "Pausar" : "Reproducir"}>
           <Icon name={playingParent ? "pause" : "play"} />
         </button>
         <button aria-label="Canción siguiente" onClick={onNext}>
@@ -248,8 +229,8 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div 
-                onClick={() => onSelectTrack(index)} 
+              <div
+                onClick={() => onSelectTrack(index)}
                 style={{ cursor: "pointer", display: "flex", alignItems: "center", flex: 1 }}
               >
                 <span style={{ color: "#d1498c", fontWeight: "bold", marginRight: "12px" }}>
@@ -294,17 +275,19 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
 
             {/* Letra desplegable */}
             {selectedLyricsIndex === index && (
-              <div style={{
-                marginTop: "12px",
-                padding: "10px",
-                background: "#ffffff",
-                border: "1px solid #ff69b4",
-                borderRadius: "4px",
-                whiteSpace: "pre-line",
-                fontSize: "13px",
-                color: "#444",
-                fontStyle: "italic"
-              }}>
+              <div
+                style={{
+                  marginTop: "12px",
+                  padding: "10px",
+                  background: "#ffffff",
+                  border: "1px solid #ff69b4",
+                  borderRadius: "4px",
+                  whiteSpace: "pre-line",
+                  fontSize: "13px",
+                  color: "#444",
+                  fontStyle: "italic",
+                }}
+              >
                 {track.lyrics}
               </div>
             )}
@@ -330,8 +313,7 @@ function Portfolio() {
           <span className="blink-dot" /> NUESTRO ARCHIVO VISUAL
         </div>
         <p>
-          Aquí puedes reemplazar las imágenes y guardar los mejores recuerdos de cada escenario,
-          festival o evento.
+          Aquí puedes reemplazar las imágenes y guardar los mejores recuerdos de cada escenario, festival o evento.
         </p>
       </div>
       <div className="filters" aria-label="Filtros del portafolio">
@@ -408,28 +390,36 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-  <header className="top-header" id="inicio">
-    <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-      {/* Contenedor circular */}
-      <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
-        <img src={logo1} alt="Logo Gomitas Ácidas" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} />
-      </div>
-      <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
-        {/* Título más grande */}
-        <span style={{ fontSize: "2.1rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
-        <small style={{ fontSize: "0.9rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
-      </span>
-    </a>
-    <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}> MENU </button>
-    <nav className={menuOpen ? "open" : ""}>
-      <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
-      <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
-      <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
-      <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
-    </nav>
-  </header>
+        <header className="top-header" id="inicio">
+          <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+            {/* Contenedor circular */}
+            <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+              <img 
+                src={logo1} 
+                alt="Logo Gomitas Ácidas" 
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
+              />
+            </div>
+            <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
+              {/* Título más grande */}
+              <span style={{ fontSize: "2.1rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
+              <small style={{ fontSize: "0.9rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
+            </span>
+          </a>
 
-        <div className="category-strip"> 
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+            MENU
+          </button>
+
+          <nav className={menuOpen ? "open" : ""}>
+            <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
+            <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
+            <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
+            <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
+          </nav>
+        </header>
+
+        <div className="category-strip">
           <span>POP RUIDOSO</span>
           <span>DIARIOS</span>
           <span>TOCATAS</span>
@@ -460,11 +450,7 @@ export default function App() {
               </p>
               <div className="butterfly-card">
                 <span>✦</span>
-                <strong>
-                  CHICAS
-                  <br />
-                  DEL INTERNET
-                </strong>
+                <strong> CHICAS <br /> DEL INTERNET </strong>
                 <span>✦</span>
               </div>
             </section>
@@ -473,12 +459,10 @@ export default function App() {
               <h2 className="module-title">Contactar a Gomitas Ácidas</h2>
               <div className="contact-grid">
                 <button onClick={() => setFriend(!friend)}>
-                  <Icon name="heart" />
-                  {friend ? "Amigas!" : "Agregar"}
+                  <Icon name="heart" /> {friend ? "Amigas!" : "Agregar"}
                 </button>
                 <a href="mailto:gomitasacidasband@gmail.com">
-                  <Icon name="mail" />
-                  Mensaje
+                  <Icon name="mail" /> Mensaje
                 </a>
                 <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
                   <b>IG</b> Instagram
@@ -490,9 +474,9 @@ export default function App() {
             </section>
 
             {/* Reproductor de música */}
-            <MusicPlayer 
-              currentTrackIndex={currentTrackIndex} 
-              playingParent={playingParent} 
+            <MusicPlayer
+              currentTrackIndex={currentTrackIndex}
+              playingParent={playingParent}
               setPlayingParent={setPlayingParent}
               onTrackEnd={handleTrackEnd}
               refAudio={audioRef}
@@ -524,19 +508,6 @@ export default function App() {
           </aside>
 
           <div className="main-column">
-            <section className="login-bar module">
-              <span>Member Login</span>
-              <label>
-                E-Mail
-                <input value="gomitasacidasband@gmail.com" readOnly />
-              </label>
-              <label>
-                Password
-                <input value="********" readOnly />
-              </label>
-              <button>LOGIN</button>
-            </section> 
-
             <section className="hero-panel module">
               <div className="hero-art">
                 <img src={images.singer} alt="Cantante de la banda durante una tocata" />
@@ -544,9 +515,7 @@ export default function App() {
               </div>
               <div className="hero-copy">
                 <p>BIENVENIDES A NUESTRA WEB </p>
-                <h2>
-                  Un blog de  <em>Música</em>
-                </h2>
+                <h2> Un blog de  <em>Música</em> </h2>
                 <span>.fotos borrosas y canciones tristes pero rosa jej</span>
                 <a href="#portafolio">VER NUESTROS RECUERDOS &gt;&gt;</a>
               </div>
@@ -572,9 +541,7 @@ export default function App() {
             <Portfolio />
 
             <section className="blog module" id="blog">
-              <h2 className="module-title">
-                Gomitas Ácidas' Latest Blog Entries
-              </h2>
+              <h2 className="module-title"> Gomitas Ácidas' Latest Blog Entries </h2>
               {posts.map((post) => (
                 <article key={post.title}>
                   <time>{post.date}</time>
@@ -591,9 +558,7 @@ export default function App() {
               <h2 className="module-title">Acerca de nosotras</h2>
               <div>
                 <span className="huge-heart">♥</span>
-                <p>
-                  EDITAR ESTO JEJEJEJE
-                </p>
+                <p> EDITAR ESTO JEJEJEJE </p>
               </div>
             </section>
           </div>
@@ -601,16 +566,17 @@ export default function App() {
 
         <div className="moving-message">
           <div>
-            NUEVA EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVA EP
-            DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 ·
+            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · 
           </div>
         </div>
 
         <footer>
           <b>Gomitas Ácidas ★ online since 2026</b>
           <div>
-            <a href="https://www.instagram.com/gomitasacidasband/">Instagram</a> · <a href="https://www.tiktok.com/@gomitasacidasband">TikTok</a>{" "}
-            · <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ">YouTube Music</a> · <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt">Spotify</a>
+            <a href="https://www.instagram.com/gomitasacidasband/">Instagram</a> ·{" "}
+            <a href="https://www.tiktok.com/@gomitasacidasband">TikTok</a> ·{" "}
+            <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ">YouTube Music</a> ·{" "}
+            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt">Spotify</a>
           </div>
           <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
         </footer>
