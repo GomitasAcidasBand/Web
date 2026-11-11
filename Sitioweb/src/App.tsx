@@ -357,7 +357,7 @@ export default function App() {
             </section>
           </aside>
 
-          {/*
+          
           <div className="main-column">
             <section className="login-bar module">
               <span>Member Login</span>
@@ -370,7 +370,7 @@ export default function App() {
                 <input value="********" readOnly />
               </label>
               <button>LOGIN</button>
-            </section> */}
+            </section> 
 
             <section className="hero-panel module">
               <div className="hero-art">
