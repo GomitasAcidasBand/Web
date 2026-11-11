@@ -684,4 +684,131 @@ export default function App() {
               </div>
               <div style={{ textAlign: "center", marginTop: "15px" }}>
                 <button
-                  onClick={() => setShow
+                  onClick={() => setShowMerchModal(true)}
+                  style={{
+                    background: "#ff69b4",
+                    color: "#fff",
+                    border: "2px dashed #fff",
+                    padding: "8px 16px",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                    fontFamily: "monospace",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  ✦ VER MÁS MERCH (ARCHIVOS SECRETOS) ✦
+                </button>
+              </div>
+            </section>
+
+            {/* Ventana Modal Estilo Zutomayo para ver todo el Merch */}
+            {showMerchModal && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  height: "100vh",
+                  background: "rgba(0, 0, 0, 0.6)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 1000,
+                  backdropFilter: "blur(3px)",
+                }}
+              >
+                <div
+                  style={{
+                    background: "#fff0f5",
+                    border: "3px solid #ff69b4",
+                    borderRadius: "12px",
+                    padding: "20px",
+                    width: "90%",
+                    maxWidth: "600px",
+                    maxHeight: "85vh",
+                    overflowY: "auto",
+                    position: "relative",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <button
+                    onClick={() => setShowMerchModal(false)}
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "12px",
+                      background: "#ff69b4",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "30px",
+                      height: "30px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                    }}
+                  >
+                    ✕
+                  </button>
+
+                  <h3 style={{ textAlign: "center", color: "#d1498c", marginBottom: "15px", fontFamily: "monospace" }}>
+                    ✦ ARCHIVO COMPLETO DE MERCH ✦
+                  </h3>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
+                    {extraMerchItems.map((item) => (
+                      <MerchCard key={item.label} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <Portfolio />
+
+            <section className="blog module" id="blog">
+              <h2 className="module-title"> Gomitas Ácidas' Latest Blog Entries </h2>
+              {posts.map((post) => (
+                <article key={post.title}>
+                  <time>{post.date}</time>
+                  <div>
+                    <h3>{post.title}</h3>
+                    <p>{post.text}</p>
+                  </div>
+                  <a href="#blog">[leer más]</a>
+                </article>
+              ))}
+            </section>
+
+            <section className="about module" id="nosotras">
+              <h2 className="module-title">Acerca de nosotras</h2>
+              <div>
+                <span className="huge-heart">♥</span>
+                <p> EDITAR ESTO JEJEJEJE </p>
+              </div>
+            </section>
+          </div>
+        </main>
+
+        <div className="moving-message">
+          <div>
+            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE ·
+          </div>
+        </div>
+
+        <footer>
+          <b>Gomitas Ácidas ★ online since 2026</b>
+          <div>
+            <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">Instagram</a> ·{" "}
+            <a href="https://www.tiktok.com/@gomitasacidasband" target="_blank" rel="noreferrer">TikTok</a> ·{" "}
+            <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ" target="_blank" rel="noreferrer">YouTube Music</a> ·{" "}
+            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">Spotify</a>
+          </div>
+          <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
+        </footer>
+      </div>
+    </div>
+  );
+}
