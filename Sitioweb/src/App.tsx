@@ -110,7 +110,13 @@ const portfolio = [
 ];
 
 // Video clips con su respectiva ID de YouTube para la ventana flotante
-const videoClips = [
+const videoClips = [ 
+  {
+    date: "15.10.2026",
+    title: "Mariposas (Official Video)",
+    thumbnail: "https://img.youtube.com/vi/QebeZoAXDOE/hqdefault.jpg",
+    embedId: "QebeZoAXDOE",
+  },
   {
     date: "06.11.2026",
     title: "No volverás (Official Video)",
@@ -123,12 +129,7 @@ const videoClips = [
     thumbnail: "https://img.youtube.com/vi/AjWMq2OSemM/hqdefault.jpg",
     embedId: "AjWMq2OSemM",
   },
-  {
-    date: "15.10.2026",
-    title: "Mariposas (Official Video)",
-    thumbnail: "https://img.youtube.com/vi/QebeZoAXDOE/hqdefault.jpg",
-    embedId: "QebeZoAXDOE",
-  },
+ 
 ];
 
 const mainMerchItems = [
@@ -398,14 +399,7 @@ function Portfolio() {
         <span>Portafolio de tocatas + eventos</span>
         <small>{visible.length} ÁLBUMES</small>
       </div>
-      <div className="portfolio-intro">
-        <div>
-          <span className="blink-dot" /> NUESTRO ARCHIVO VISUAL
-        </div>
-        <p>
-          Aquí puedes reemplazar las imágenes y guardar los mejores recuerdos de cada escenario, festival o evento.
-        </p>
-      </div>
+      
       <div className="filters" aria-label="Filtros del portafolio">
         {["todo", "tocatas", "eventos", "backstage"].map((item) => (
           <button
@@ -999,7 +993,7 @@ export default function App() {
                       onClick={() => setActiveVideoId(clip.embedId)}
                       style={{ background: "none", border: "none", padding: 0, fontSize: "12px", color: "#d1498c", fontWeight: "bold", cursor: "pointer", textAlign: "left" }}
                     >
-                      [Reproducir en ventana flotante ✦]
+                     ✦ VER ✦
                     </button>
                   </div>
                 </article>
