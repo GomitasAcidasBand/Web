@@ -532,9 +532,9 @@ export default function App() {
     <div className="page-background">
       <div className="floating-shape shape-one">✦</div>
       <div className="floating-shape shape-two">♥</div>
-
+      
       <div className="site-frame">
-         <heade className="top-header" id="inicio">
+        <header className="top-header" id="inicio">
           <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
             <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
               <img 
