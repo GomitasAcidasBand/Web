@@ -4,7 +4,6 @@ import mainPortada from "./media1/4.jpg";
 import main1 from "./media1/1.jpg";
 import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
-import logoPersonalizado from "./media1/logo.png";
 import cd from "./media1/Cd.png";
 import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
@@ -21,7 +20,6 @@ const images = {
   singer: main1,
   band: logo1,
   guitar: logo2,
-  customLogo: logoPersonalizado,
   cd: cd,
   cd1: cd1,
   cd2: cd2,
