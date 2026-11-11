@@ -4,7 +4,6 @@ import mainPortada from "./media1/4.jpg";
 import main1 from "./media1/1.jpg";
 import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
-import logoPersonalizado from "./media1/logo.png";
 import cd from "./media1/Cd.png";
 import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
@@ -21,7 +20,7 @@ const images = {
   singer: main1,
   band: logo1,
   guitar: logo2,
-  customLogo: logoPersonalizado,
+
   cd: cd,
   cd1: cd1,
   cd2: cd2,
@@ -122,7 +121,7 @@ const posts = [
   },
 ];
 
-// Listas de imágenes para cada producto de Merch
+// Listas limpias de imágenes para cada producto de Merch
 const merchItems = [
   {
     label: "CD'S",
@@ -385,7 +384,7 @@ function Portfolio() {
   );
 }
 
-// Componente individual para manejar el carrusel de cada tarjeta de Merch
+// Componente para manejar el carrusel de cada tarjeta de Merch
 function MerchCard({ item }: { item: { label: string; images: string[] } }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -402,7 +401,6 @@ function MerchCard({ item }: { item: { label: string; images: string[] } }) {
   return (
     <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", background: "#fff", border: "1px solid #ffb6c1", borderRadius: "6px", padding: "8px" }}>
       <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        {/* Botón Izquierda */}
         {item.images.length > 1 && (
           <button
             onClick={handlePrev}
@@ -415,7 +413,6 @@ function MerchCard({ item }: { item: { label: string; images: string[] } }) {
 
         <img src={item.images[currentIndex]} alt={item.label} style={{ width: "100%", height: "120px", objectFit: "cover", borderRadius: "4px" }} />
 
-        {/* Botón Derecha */}
         {item.images.length > 1 && (
           <button
             onClick={handleNext}
