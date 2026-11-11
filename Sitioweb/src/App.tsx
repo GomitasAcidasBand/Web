@@ -545,6 +545,7 @@ export default function App() {
             </span>
           </a>
 
+          {/* Menú desplegable con icono de rayitas ☰ */}
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú" style={{ fontSize: "24px", background: "none", border: "none", cursor: "pointer", color: "#d1498c" }}>
             ☰
           </button>
