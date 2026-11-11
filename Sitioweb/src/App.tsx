@@ -4,6 +4,7 @@ import mainPortada from "./media1/4.jpg";
 import main1 from "./media1/1.jpg";
 import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
+import logoPersonalizado from "./media1/logo.png"; // Tu imagen de logo (ajusta el nombre si es necesario)
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
@@ -31,7 +32,7 @@ const epTracks = [
     title: "Despertar", 
     duration: "03:42", 
     file: cancion1,
-    lyrics: "No volverás\n\nComienzo a despertar de este sueño mortal\ny cuando me levanto puedo ver lo linda que estás.\n\nDifícil es volver a ser como era antes,\nque cuando te veía sonreía y estaba bien."
+    lyrics: "Comienzo a despertar de este sueño mortal\ny cuando me levanto puedo ver lo linda que estás.\n\nDifícil es volver a ser como era antes,\nque cuando te veía sonreía y estaba bien."
   },
   { 
     number: "03", 
@@ -407,7 +408,7 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-       <header className="top-header" id="inicio">
+        <header className="top-header" id="inicio">
           <a href="#inicio" className="logo">
             <img 
               src={logoPersonalizado} 
@@ -491,13 +492,13 @@ export default function App() {
                 <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
                   <b>IG</b> Instagram
                 </a>
-                <button onClick={() => alert("¡Hola! Por el momento solo atendemos por correo o Instagram jej 💌")}>
-                  <b>TK</b> WhatsApp
-                </button>
+                <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">
+                  <b>TK</b> Spotify
+                </a>
               </div>
             </section>
 
-            {/* Reproductor de música arriba en la barra lateral */}
+            {/* Reproductor de música */}
             <MusicPlayer 
               currentTrackIndex={currentTrackIndex} 
               playingParent={playingParent} 
@@ -508,7 +509,7 @@ export default function App() {
               onPrev={handlePrev}
             />
 
-            {/* El Tracklist con las letras quedó puesto justo debajo del reproductor */}
+            {/* Tracklist con las letras justo debajo del reproductor */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
             <section className="module next-shows">
@@ -531,7 +532,20 @@ export default function App() {
             </section>
           </aside>
 
-          <div className="content-area">
+          <div className="main-column">
+            <section className="login-bar module">
+              <span>Member Login</span>
+              <label>
+                E-Mail
+                <input value="gomitasacidasband@gmail.com" readOnly />
+              </label>
+              <label>
+                Password
+                <input value="********" readOnly />
+              </label>
+              <button>LOGIN</button>
+            </section> 
+
             <section className="hero-panel module">
               <div className="hero-art">
                 <img src={images.singer} alt="Cantante de la banda durante una tocata" />
