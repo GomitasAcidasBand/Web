@@ -112,22 +112,22 @@ const portfolio = [
 // Video clips con su respectiva ID de YouTube para la ventana flotante
 const videoClips = [
   {
-    date: "28.08.24",
+    date: "06.11.2026",
     title: "No volverás (Official Video)",
-    thumbnail: images.main,
+    thumbnail: "https://img.youtube.com/vi/usxv-_zFwwI/hqdefault.jpg",
     embedId: "usxv-_zFwwI", // ID del video de YouTube que compartiste
   },
   {
-    date: "16.08.24",
-    title: "Despertar (Live Session)",
-    thumbnail: images.singer,
-    embedId: "usxv-_zFwwI",
+    date: "06.11.2026",
+    title: "Despertar (Official Video)",
+    thumbnail: "https://img.youtube.com/vi/AjWMq2OSemM/hqdefault.jpg",
+    embedId: "AjWMq2OSemM",
   },
   {
-    date: "02.08.24",
-    title: "Mariposas (Visualizer)",
-    thumbnail: images.band,
-    embedId: "usxv-_zFwwI",
+    date: "15.10.2026",
+    title: "Mariposas (Official Video)",
+    thumbnail: "https://img.youtube.com/vi/QebeZoAXDOE/hqdefault.jpg",
+    embedId: "QebeZoAXDOE",
   },
 ];
 
