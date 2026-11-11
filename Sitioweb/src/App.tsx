@@ -6,9 +6,9 @@ import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
-import cancion1 from "./canciones/novolveras.mp3";
-import cancion2 from "./canciones/despertar.mp3";
-import cancion3 from "./canciones/mariposas.mp3";
+import cancion1 from "./canciones/despertar.mp3";
+import cancion2 from "./canciones/mariposas.mp3";
+import cancion3 from "./canciones/novolveras.mp3";
 import cancion4 from "./canciones/tragicoamor.mp3";
 
 const images = {
@@ -19,33 +19,33 @@ const images = {
 };
 
 const epTracks = [
-   { 
+  { 
     number: "01", 
-    title: "No Volverás", 
+    title: "No volverás", 
     duration: "02:50", 
-    file: cancion1,
-    lyrics: "Te miro, intento\ncomprender que no regresarás.\nTe pienso todo el tiempo\npero sé que ya no volverás.\nYo solo quiero escapar\nde esta mierda de soledad,\ny quizás, encontrar\nla respuesta a esta casualidad."
+    file: cancion3,
+    lyrics: "Te miro, intento comprender que no regresarás.\nTe pienso todo el tiempo pero sé que ya no volverás.\n\nYo solo quiero escapar de esta mierda de soledad,\ny quizás, encontrar la respuesta a esta casualidad.\n\nNo entiendo lo que siento, pero sé que ya no te quiero más.\nPretendo romper el juego en el que tú no sabías amar.\n\nYo solo quiero escapar de esta mierda de soledad,\ny quizás, encontrar la respuesta a esta casualidad."
   },
   { 
     number: "02", 
     title: "Despertar", 
     duration: "03:42", 
-    file: cancion2,
-    lyrics: "Abro los ojos y el cielo está rosado...\nYa no hay tiempo para mirar atrás,\nsolo queda avanzar oyendo este ruido.\n(Despertar, despertar...)"
+    file: cancion1,
+    lyrics: "No volverás\n\nComienzo a despertar de este sueño mortal\ny cuando me levanto puedo ver lo linda que estás.\n\nDifícil es volver a ser como era antes,\nque cuando te veía sonreía y estaba bien."
   },
   { 
     number: "03", 
     title: "Mariposas", 
     duration: "03:15", 
-    file: cancion3,
-    lyrics: "Vuelan sin rumbo por la habitación,\nvidrios rotos y una vieja canción.\nTus ojos tristes bajo la luz de neón,\nhicieron eco en mi corazón."
+    file: cancion2,
+    lyrics: "Tú, y tus ojos me cautivan me hacen ver\nque el amor no tendría que doler.\n\nY pasa el tiempo y aún te quiero,\nlas mariposas vuelan,\nlas mariposas vuelan.\n\nOtra vez, otra vez."
   },
   { 
     number: "04", 
-    title: "Trágico Amor", 
+    title: "Trágico amor", 
     duration: "03:30", 
     file: cancion4,
-    lyrics: "Un drama pop en blanco y negro,\ncorriendo tarde bajo la lluvia en invierno.\nEras perfecto para un final abierto,\npero prefiero seguir tocando este instrumento."
+    lyrics: "Podríamos volver a intentarlo más.\nY al final, no bastaría.\n\nY tal vez, no odiemos más,\ny tal vez, nos dañemos más.\n\nMe asfixia, este trágico amor.\nTrágico amor, trágico - trágico amor.\n\nNos odiemos más y tal vez,\nnos dañemos más.\n\nTrágico amor."
   },
 ];
 
@@ -149,7 +149,7 @@ function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "
   );
 }
 
-function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTrackEnd, refAudio }: any) {
+function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTrackEnd, refAudio, onPrev, onNext }: any) {
   const [progress, setProgress] = useState(0);
   const activeTrack = epTracks[currentTrackIndex];
 
@@ -158,7 +158,7 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
     if (!player) return;
     const update = () => setProgress((player.currentTime / (player.duration || 1)) * 100);
     const handleEnded = () => {
-      onTrackEnd(); // Pasa automáticamente a la siguiente canción en orden
+      onTrackEnd();
     };
     player.addEventListener("timeupdate", update);
     player.addEventListener("ended", handleEnded);
@@ -204,7 +204,7 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
         <i style={{ width: `${progress}%` }} />
       </div>
       <div className="mini-controls">
-        <button aria-label="Canción anterior">
+        <button aria-label="Canción anterior" onClick={onPrev}>
           <Icon name="prev" />
         </button>
         <button
@@ -214,7 +214,7 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
         >
           <Icon name={playingParent ? "pause" : "play"} />
         </button>
-        <button aria-label="Canción siguiente">
+        <button aria-label="Canción siguiente" onClick={onNext}>
           <Icon name="next" />
         </button>
         <span>{activeTrack.duration}</span>
@@ -256,7 +256,7 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
                 </span>
                 <span style={{ color: "#333", fontWeight: "600" }}>{track.title}</span>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <span style={{ fontSize: "12px", color: "#777" }}>{track.duration}</span>
                 <button
                   onClick={() => setSelectedLyricsIndex(selectedLyricsIndex === index ? null : index)}
@@ -265,13 +265,13 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
                     background: "#ffb6c1",
                     color: "#fff",
                     border: "none",
-                    padding: "4px 10px",
+                    padding: "4px 8px",
                     borderRadius: "4px",
                     cursor: "pointer",
                     fontWeight: "bold",
                   }}
                 >
-                  {selectedLyricsIndex === index ? "Ocultar Letra" : "Ver Letra ✍️"}
+                  {selectedLyricsIndex === index ? "Ocultar" : "Letra ✍️"}
                 </button>
                 <button
                   onClick={() => onSelectTrack(index)}
@@ -280,7 +280,7 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
                     background: "#ff69b4",
                     color: "#fff",
                     border: "none",
-                    padding: "4px 10px",
+                    padding: "4px 8px",
                     borderRadius: "4px",
                     cursor: "pointer",
                     fontWeight: "bold",
@@ -291,7 +291,7 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
               </div>
             </div>
 
-            {/* Desplegable de la letra */}
+            {/* Letra desplegable */}
             {selectedLyricsIndex === index && (
               <div style={{
                 marginTop: "12px",
@@ -370,7 +370,6 @@ export default function App() {
   const [playingParent, setPlayingParent] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Cambiar y reproducir al hacer click en una canción de la lista
   const handleSelectTrack = async (index: number) => {
     setCurrentTrackIndex(index);
     setPlayingParent(true);
@@ -381,7 +380,6 @@ export default function App() {
     }, 100);
   };
 
-  // Pasar automáticamente a la siguiente canción en orden
   const handleTrackEnd = async () => {
     const nextIndex = (currentTrackIndex + 1) % epTracks.length;
     setCurrentTrackIndex(nextIndex);
@@ -391,6 +389,16 @@ export default function App() {
         await audioRef.current.play();
       }
     }, 100);
+  };
+
+  const handleNext = () => {
+    const nextIndex = (currentTrackIndex + 1) % epTracks.length;
+    handleSelectTrack(nextIndex);
+  };
+
+  const handlePrev = () => {
+    const prevIndex = (currentTrackIndex - 1 + epTracks.length) % epTracks.length;
+    handleSelectTrack(prevIndex);
   };
 
   return (
@@ -485,13 +493,19 @@ export default function App() {
               </div>
             </section>
 
+            {/* Reproductor de música arriba en la barra lateral */}
             <MusicPlayer 
               currentTrackIndex={currentTrackIndex} 
               playingParent={playingParent} 
               setPlayingParent={setPlayingParent}
               onTrackEnd={handleTrackEnd}
               refAudio={audioRef}
+              onNext={handleNext}
+              onPrev={handlePrev}
             />
+
+            {/* El Tracklist con las letras quedó puesto justo debajo del reproductor */}
+            <EpSection onSelectTrack={handleSelectTrack} />
 
             <section className="module next-shows">
               <h2 className="module-title">Próximas tocatas</h2>
@@ -541,9 +555,6 @@ export default function App() {
                 <a href="#portafolio">VER NUESTROS RECUERDOS &gt;&gt;</a>
               </div>
             </section>
-
-            {/* Apartado del tracklist con el botón de "Ver Letra" */}
-            <EpSection onSelectTrack={handleSelectTrack} />
 
             <section className="top-finds module">
               <h2 className="module-title">Top Finds</h2>
