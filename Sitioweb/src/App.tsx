@@ -287,7 +287,7 @@ export default function App() {
         <main className="profile-layout">
           <aside className="sidebar">
             <section className="profile-card module">
-              <h1>@lasfurias</h1>
+              <h1>@gomitasacidasband</h1>
               <div className="profile-photo">
                 <img src={images.main} alt="Las integrantes de la banda cantando en vivo" />
                 <span> Escucha dulces sueños!! ♡ </span>
@@ -357,19 +357,20 @@ export default function App() {
             </section>
           </aside>
 
+          {/*
           <div className="main-column">
             <section className="login-bar module">
               <span>Member Login</span>
               <label>
                 E-Mail
-                <input value="fan@lasfurias.com" readOnly />
+                <input value="gomitasacidasband@gmail.com" readOnly />
               </label>
               <label>
                 Password
                 <input value="********" readOnly />
               </label>
               <button>LOGIN</button>
-            </section>
+            </section> */}
 
             <section className="hero-panel module">
               <div className="hero-art">
@@ -407,7 +408,7 @@ export default function App() {
 
             <section className="blog module" id="blog">
               <h2 className="module-title">
-                Las Furias' Latest Blog Entries <small>[Subscribe to this Blog]</small>
+                Gomitas Ácidas' Latest Blog Entries
               </h2>
               {posts.map((post) => (
                 <article key={post.title}>
@@ -426,8 +427,7 @@ export default function App() {
               <div>
                 <span className="huge-heart">♥</span>
                 <p>
-                  Somos amigas antes que banda. Hacemos canciones para escuchar con audífonos,
-                  cantar muy fuerte y mandarle a tu ex. Este es nuestro pequeño rincón de internet.
+                  EDITAR ESTO JEJEJEJE
                 </p>
               </div>
             </section>
@@ -436,18 +436,18 @@ export default function App() {
 
         <div className="moving-message">
           <div>
-            NUEVA CANCIÓN DISPONIBLE · CORAZÓN DE PLÁSTICO · PRÓXIMA TOCATA 14.09 · NUEVA CANCIÓN
-            DISPONIBLE · CORAZÓN DE PLÁSTICO · PRÓXIMA TOCATA 14.09 ·
+            NUEVA EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVA EP
+            DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 ·
           </div>
         </div>
 
         <footer>
-          <b>lasfurias ★ online since 2021</b>
+          <b>Gomitas Ácidas ★ online since 2026</b>
           <div>
-            <a href="https://instagram.com">Instagram</a> · <a href="https://tiktok.com">TikTok</a>{" "}
-            · <a href="https://youtube.com">YouTube</a> · <a href="https://spotify.com">Spotify</a>
+            <a href="https://www.instagram.com/gomitasacidasband/">Instagram</a> · <a href="https://www.tiktok.com/@gomitasacidasband">TikTok</a>{" "}
+            · <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ">YouTube Music</a> · <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt">Spotify</a>
           </div>
-          <span>© 2025 LAS FURIAS — HECHO CON RUIDO Y AMISTAD</span>
+          <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
         </footer>
       </div>
     </div>
