@@ -1,5 +1,5 @@
 
-      import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Imágenes
 import mainPortada from "./media1/4.jpg";
@@ -384,6 +384,11 @@ export default function App() {
     handleSelectTrack(prevIndex);
   };
 
+  const handleWhatsAppJoke = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert("¡Jaja, WhatsApp no es posible! 🚫📱\n\nEscríbenos por Instagram o mándanos un correo a nuestro Gmail para hablar con el power trío ♡");
+  };
+
   return (
     <div className="page-background">
       <div className="floating-shape shape-one">✦</div>
@@ -571,7 +576,7 @@ export default function App() {
             <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">Instagram</a> ·{" "}
             <a href="https://www.tiktok.com/@gomitasacidasband" target="_blank" rel="noreferrer">TikTok</a> ·{" "}
             <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ" target="_blank" rel="noreferrer">YouTube Music</a> ·{" "}
-            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">Spotify</a>
+            <a href="#whatsapp" onClick={handleWhatsAppJoke} style={{ cursor: "pointer" }}>WhatsApp</a>
           </div>
           <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
         </footer>
