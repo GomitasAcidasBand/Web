@@ -154,29 +154,29 @@ const extraMerchItems = [
     images: [images.band, images.main, images.singer], 
   },
 ];
-// FLYER CON LINKKKKS
+
 const upcomingShows = [
   {
-    date: "14.09",
+    date: "03.12",
     title: "Caja Acústica",
     city: "Santiago",
-    flyer: fecha03, 
+    flyer: fecha03,
     ticketUrl: "https://portaldisc.com/evento/cajacusticatresdedic",
   },
- /* {
-    date: "",
-    title: "",
-    city: "",
+  {
+    date: "28.09",
+    title: "Club Subterráneo",
+    city: "Providencia",
     flyer: images.singer,
-    ticketUrl: "",
+    ticketUrl: "https://www.puntoticket.com",
   },
   {
-    date: "0",
+    date: "12.10",
     title: "Feria En Órbita",
     city: "Valparaíso",
     flyer: images.band,
     ticketUrl: "https://www.passline.com",
-  },*/
+  },
 ];
 
 function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "mail" }) {
@@ -414,8 +414,6 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
-  
-  // Estado para zoom de imágenes
   const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -458,7 +456,6 @@ export default function App() {
     alert("¡Jaja, WhatsApp no es posible! 🚫📱\n\nEscríbenos por Instagram o mándanos un correo a nuestro Gmail para hablar con el power trío ♡");
   };
 
-  // Componente interno MerchCard
   function MerchCard({ item }: { item: { label: string; images: string[] } }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -606,10 +603,10 @@ export default function App() {
               onPrev={handlePrev}
             />
 
-            {/* Tracklist con las letras justo debajo del reproductor */}
+            {/* Tracklist con las letras */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
-            {/* Próximas tocatas con flyer y link */}
+            {/* Próximas tocatas */}
             <section className="module next-shows">
               <h2 className="module-title">Próximas tocatas</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -644,7 +641,7 @@ export default function App() {
                           boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                         }}
                       >
-                        🎟️ Comprar Entradas ★★★★
+                        🎟️ Comprar Entradas
                       </a>
                     </div>
                   </div>
@@ -694,7 +691,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Ventana Modal para ver todo el Merch */}
+            {/* Ventana Modal de Merch */}
             {showMerchModal && (
               <div
                 style={{
@@ -901,9 +898,10 @@ export default function App() {
           </div>
         </main>
 
+        {/* 🌟 BANNER INFERIOR RECUPERADO Y CORREGIDO */}
         <div className="moving-message">
           <div>
-            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE ·
+            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 03.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 03.12 · NUEVO EP DISPONIBLE ·
           </div>
         </div>
 
