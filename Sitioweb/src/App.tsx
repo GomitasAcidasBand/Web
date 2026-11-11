@@ -94,10 +94,10 @@ const portfolio = [
     image: images.logo1,
   },
   {
-    title: "Noche de lanzamiento",
-    place: "Sala Metrónomo",
-    date: "04 ABR 2024",
-    type: "eventos",
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "backstage",
     image: images.logo1,
   },
   {
