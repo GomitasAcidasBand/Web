@@ -8,6 +8,7 @@ import cd from "./media1/Cd.png";
 import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
 import cd3 from "./media1/Cd3.png";
+import fecha03 from "./media1/03-12.png";
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
@@ -24,6 +25,7 @@ const images = {
   cd1: cd1,
   cd2: cd2,
   cd3: cd3,
+  flyer1:fecha03,
 };
 
 const epTracks = [
