@@ -120,8 +120,7 @@ const posts = [
   },
 ];
 
-// Listas limpias de imágenes para cada producto de Merch
-const merchItems = [
+const mainMerchItems = [
   {
     label: "CD'S",
     images: [images.cd, images.cd1, images.cd2, images.cd3],
@@ -138,6 +137,9 @@ const merchItems = [
     label: "Encendedores",
     images: [images.guitar, images.singer], 
   },
+];
+
+const extraMerchItems = [
   {
     label: "Ositos con chapitas",
     images: [images.main, images.band], 
@@ -383,9 +385,10 @@ function Portfolio() {
   );
 }
 
-// Componente para manejar el carrusel de cada tarjeta de Merch
+// Componente MerchCard con soporte para zoom en ventana flotante (Lightbox)
 function MerchCard({ item }: { item: { label: string; images: string[] } }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   const handlePrev = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -398,38 +401,104 @@ function MerchCard({ item }: { item: { label: string; images: string[] } }) {
   };
 
   return (
-    <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", background: "#fff", border: "1px solid #ffb6c1", borderRadius: "6px", padding: "8px" }}>
-      <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        {item.images.length > 1 && (
-          <button
-            onClick={handlePrev}
-            style={{ position: "absolute", left: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
-            aria-label="Anterior"
-          >
-            ◀
-          </button>
-        )}
+    <>
+      <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", background: "#fff", border: "1px solid #ffb6c1", borderRadius: "6px", padding: "8px" }}>
+        <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          {item.images.length > 1 && (
+            <button
+              onClick={handlePrev}
+              style={{ position: "absolute", left: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              aria-label="Anterior"
+            >
+              ◀
+            </button>
+          )}
 
-        <img src={item.images[currentIndex]} alt={item.label} style={{ width: "100%", height: "120px", objectFit: "cover", borderRadius: "4px" }} />
+          <img 
+            src={item.images[currentIndex]} 
+            alt={item.label} 
+            onClick={() => setZoomedImage(item.images[currentIndex])}
+            style={{ width: "100%", height: "120px", objectFit: "cover", borderRadius: "4px", cursor: "zoom-in" }} 
+            title="Haz clic para ver en grande"
+          />
 
-        {item.images.length > 1 && (
-          <button
-            onClick={handleNext}
-            style={{ position: "absolute", right: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
-            aria-label="Siguiente"
-          >
-            ▶
-          </button>
-        )}
+          {item.images.length > 1 && (
+            <button
+              onClick={handleNext}
+              style={{ position: "absolute", right: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              aria-label="Siguiente"
+            >
+              ▶
+            </button>
+          )}
+        </div>
+        <span style={{ marginTop: "6px", fontSize: "13px", fontWeight: "bold", color: "#d1498c" }}>{item.label}</span>
       </div>
-      <span style={{ marginTop: "6px", fontSize: "13px", fontWeight: "bold", color: "#d1498c" }}>{item.label}</span>
-    </div>
+
+      {/* Ventana flotante (Lightbox / Zoom) */}
+      {zoomedImage && (
+        <div
+          onClick={() => setZoomedImage(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0, 0, 0, 0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 2000,
+            backdropFilter: "blur(5px)",
+            cursor: "zoom-out",
+          }}
+        >
+          <div style={{ position: "relative", padding: "10px", maxWidth: "90%", maxHeight: "90%" }} onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setZoomedImage(null)}
+              style={{
+                position: "absolute",
+                top: "-15px",
+                right: "-15px",
+                background: "#ff69b4",
+                color: "#fff",
+                border: "2px solid #fff",
+                borderRadius: "50%",
+                width: "35px",
+                height: "35px",
+                cursor: "pointer",
+                fontWeight: "bold",
+                fontSize: "16px",
+                zIndex: 2010,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+              }}
+            >
+              ✕
+            </button>
+            <img
+              src={zoomedImage}
+              alt="Zoom Merch"
+              style={{
+                maxWidth: "85vw",
+                maxHeight: "85vh",
+                objectFit: "contain",
+                borderRadius: "8px",
+                border: "4px solid #fff",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
+  const [showMerchModal, setShowMerchModal] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [playingParent, setPlayingParent] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -480,7 +549,7 @@ export default function App() {
           <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
             <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
               <img 
-                src={logoPersonalizado} 
+                src={logo1} 
                 alt="Logo Gomitas Ácidas" 
                 style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
               />
@@ -608,11 +677,93 @@ export default function App() {
             <section className="top-finds module">
               <h2 className="module-title">❀ MERCH ❀</h2>
               <div className="find-grid">
-                {merchItems.map((item) => (
+                {mainMerchItems.map((item) => (
                   <MerchCard key={item.label} item={item} />
                 ))}
               </div>
+              <div style={{ textAlign: "center", marginTop: "15px" }}>
+                <button
+                  onClick={() => setShowMerchModal(true)}
+                  style={{
+                    background: "#ff69b4",
+                    color: "#fff",
+                    border: "2px dashed #fff",
+                    padding: "8px 16px",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                    fontFamily: "monospace",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  ✦ VER MÁS MERCH (ARCHIVOS SECRETOS) ✦
+                </button>
+              </div>
             </section>
+
+            {/* Ventana Modal Estilo Zutomayo para ver todo el Merch */}
+            {showMerchModal && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  height: "100vh",
+                  background: "rgba(0, 0, 0, 0.6)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 1000,
+                  backdropFilter: "blur(3px)",
+                }}
+              >
+                <div
+                  style={{
+                    background: "#fff0f5",
+                    border: "3px solid #ff69b4",
+                    borderRadius: "12px",
+                    padding: "20px",
+                    width: "90%",
+                    maxWidth: "600px",
+                    maxHeight: "85vh",
+                    overflowY: "auto",
+                    position: "relative",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <button
+                    onClick={() => setShowMerchModal(false)}
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "12px",
+                      background: "#ff69b4",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "30px",
+                      height: "30px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                    }}
+                  >
+                    ✕
+                  </button>
+
+                  <h3 style={{ textAlign: "center", color: "#d1498c", marginBottom: "15px", fontFamily: "monospace" }}>
+                    ✦ ARCHIVO COMPLETO DE MERCH ✦
+                  </h3>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
+                    {extraMerchItems.map((item) => (
+                      <MerchCard key={item.label} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <Portfolio />
 
