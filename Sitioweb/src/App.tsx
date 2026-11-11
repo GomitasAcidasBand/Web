@@ -7,7 +7,7 @@ const images = {
   // 2. Usas la variable directamente sin comillas
   main: mainPortada,
   singer: main1,
-  band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
+  //band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
   guitar: "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
   pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
   stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
@@ -144,11 +144,11 @@ function MusicPlayer() {
         src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         preload="metadata"
       />
-      <h2 className="module-title">Las Furias Music Player</h2>
+      <h2 className="module-title">Ep "dulces sueños"</h2>
       <div className="music-screen">
         <p>NOW PLAYING:</p>
         <strong>Corazón de plástico</strong>
-        <span>Las Furias / 2025</span>
+        <span>Gomitas Ácidas / 2025</span>
       </div>
       <div
         className="mini-progress"
@@ -290,12 +290,12 @@ export default function App() {
               </div>
               <div className="profile-facts">
                 <p>
-                  <b>Las Furias</b>
+                  <b>Gomitas Ácidas</b>
                   <br />
                   Ella / Ella / Ella / Ella
                 </p>
-                <p>Pop ruidoso & amistad</p>
-                <p>Santiago, Chile</p>
+                <p>Indie pop, dream pop, noise</p>
+                <p>Valparaíso, Chile</p>
                 <p>Último login: hoy</p>
               </div>
             </section>
@@ -316,21 +316,21 @@ export default function App() {
             </section>
 
             <section className="module contact-box">
-              <h2 className="module-title">Contactar a Las Furias</h2>
+              <h2 className="module-title">Contactar a Gomitas Ácidas</h2>
               <div className="contact-grid">
                 <button onClick={() => setFriend(!friend)}>
                   <Icon name="heart" />
                   {friend ? "Amigas!" : "Agregar"}
                 </button>
-                <a href="mailto:hola@lasfurias.com">
+                <a href="mailto:gomitasacidasband@gmail.com">
                   <Icon name="mail" />
                   Mensaje
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer">
+                <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
                   <b>IG</b> Instagram
                 </a>
-                <a href="https://tiktok.com" target="_blank" rel="noreferrer">
-                  <b>TK</b> TikTok
+                <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">
+                  <b>TK</b> Spotify
                 </a>
               </div>
             </section>
