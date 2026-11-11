@@ -408,35 +408,26 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-        <header className="top-header" id="inicio">
-          <a href="#inicio" className="logo">
-            <img 
-              src={logo2} 
-              alt="Logo Gomitas Ácidas" 
-              style={{ width: "65px", height: "65px", borderRadius: "50%", objectFit: "cover" }} 
-            />
-            <span> 
-              Gomitas Ácidas<small>power trío de mujeres</small> 
-            </span>
-          </a>
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-            MENU
-          </button>
-          <nav className={menuOpen ? "open" : ""}>
-            <a href="#blog" onClick={() => setMenuOpen(false)}>
-              BLOG
-            </a>
-            <a href="#musica" onClick={() => setMenuOpen(false)}>
-              MÚSICA
-            </a>
-            <a href="#portafolio" onClick={() => setMenuOpen(false)}>
-              PORTAFOLIO
-            </a>
-            <a href="#nosotras" onClick={() => setMenuOpen(false)}>
-              NOSOTRAS
-            </a>
-          </nav>
-        </header>
+      <header className="top-header" id="inicio">
+        <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <img 
+            src={logo2} 
+            alt="Logo Gomitas Ácidas" 
+            style={{ width: "110px", height: "110px", borderRadius: "50%", objectFit: "cover" }} 
+          />
+          <span style={{ display: "flex", flexDirection: "column" }}> 
+            <span style={{ fontSize: "1.6rem", fontWeight: "bold", lineHeight: "1.1" }}>Gomitas Ácidas</span>
+            <small style={{ fontSize: "0.9rem", marginTop: "4px" }}>power trío de mujeres</small> 
+          </span>
+        </a>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}> MENU </button>
+        <nav className={menuOpen ? "open" : ""}>
+          <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
+          <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
+          <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
+          <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
+        </nav>
+      </header>
 
         <div className="category-strip"> 
           <span>POP RUIDOSO</span>
