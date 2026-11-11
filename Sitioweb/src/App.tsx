@@ -158,12 +158,12 @@ const extraMerchItems = [
 const upcomingShows = [
   {
     date: "14.09",
-    title: "Festival Ruidosa",
+    title: "Caja Acústica",
     city: "Santiago",
     flyer: fecha03, // Aquí está asignado tu nuevo flyer
     ticketUrl: "https://www.passline.com",
   },
-  {
+ /* {
     date: "28.09",
     title: "Club Subterráneo",
     city: "Providencia",
@@ -176,7 +176,7 @@ const upcomingShows = [
     city: "Valparaíso",
     flyer: images.band,
     ticketUrl: "https://www.passline.com",
-  },
+  },*/
 ];
 
 function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "mail" }) {
