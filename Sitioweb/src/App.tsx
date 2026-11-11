@@ -70,42 +70,42 @@ const portfolio = [
     place: "lugar",
     date: "fecha",
     type: "eventos", // puede ser backstage y eventos 
-    image: images.logo2,
+    image: images.logo1,
   },
   {
     title: "titulo",
     place: "lugar",
     date: "fecha",
     type: "backstage", // puede ser backstage y eventos 
-    image: images.logo2,
+    image: images.logo1,
   },
  {
     title: "titulo",
     place: "lugar",
     date: "fecha",
     type: "eventos", // puede ser backstage y eventos 
-    image: images.logo2,
+    image: images.logo1,
   },
   {
     title: "titulo",
     place: "lugar",
     date: "fecha",
     type: "backstage", // puede ser backstage y eventos 
-    image: images.logo2,
+    image: images.logo1,
   },
   {
     title: "Noche de lanzamiento",
     place: "Sala Metrónomo",
     date: "04 ABR 2024",
     type: "eventos",
-    image: images.singer,
+    image: images.logo1,
   },
   {
     title: "titulo",
     place: "lugar",
     date: "fecha",
     type: "eventos", // puede ser backstage y eventos 
-    image: images.logo2,
+    image: images.logo1,
   },
 ];
 
@@ -139,7 +139,7 @@ const mainMerchItems = [
   },
   {
     label: "Poleras",
-    images: [images.logo2],
+    images: [images.logo1],
   },
   {
     label: "Posters",
@@ -147,22 +147,22 @@ const mainMerchItems = [
   },
   {
     label: "Encendedores",
-    images: [images.logo2], 
+    images: [images.logo1], 
   },
 ];
 
 const extraMerchItems = [
   {
     label: "Ositos con chapitas",
-    images: [images.logo2], 
+    images: [images.logo1], 
   },
   {
     label: "Chapitas",
-    images: [images.logo2], 
+    images: [images.logo1], 
   },
   {
     label: "Stickers",
-    images: [images.logo2], 
+    images: [images.logo1], 
   },
 ];
 
@@ -549,8 +549,24 @@ export default function App() {
             </span>
           </a>
 
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-            MENU
+          className="top-header" id="inicio">
+          <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+            <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+              <img 
+                src={logo1} 
+                alt="Logo Gomitas Ácidas" 
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
+              />
+            </div>
+            <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
+              <span style={{ fontSize: "2.1rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
+              <small style={{ fontSize: "0.9rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
+            </span>
+          </a>
+
+          {/* Botón con las rayitas comunes ☰ */}
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú" style={{ fontSize: "24px", background: "none", border: "none", cursor: "pointer", color: "#d1498c" }}>
+            ☰
           </button>
 
           <nav className={menuOpen ? "open" : ""}>
