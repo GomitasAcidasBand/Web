@@ -135,11 +135,11 @@ const videoClips = [
 const mainMerchItems = [
   {
     label: "CD'S",
-    images: [images.cd, images.cd1, images.cd2, images.cd3],
+    images: [images.cd, images.cd1, images.cd2, images.cd3], // cambiar fotos CD 
   },
   {
     label: "Poleras",
-    images: [images.singer, images.band, images.main],
+    images: [images.logo2],
   },
   {
     label: "Posters",
@@ -147,22 +147,22 @@ const mainMerchItems = [
   },
   {
     label: "Encendedores",
-    images: [images.guitar, images.singer], 
+    images: [images.logo2], 
   },
 ];
 
 const extraMerchItems = [
   {
     label: "Ositos con chapitas",
-    images: [images.main, images.band], 
+    images: [images.logo2], 
   },
   {
     label: "Chapitas",
-    images: [images.singer, images.guitar], 
+    images: [images.logo2], 
   },
   {
     label: "Stickers",
-    images: [images.band, images.main, images.singer], 
+    images: [images.logo2], 
   },
 ];
 
@@ -399,7 +399,7 @@ function Portfolio() {
         <span>Portafolio de tocatas + eventos</span>
         <small>{visible.length} ÁLBUMES</small>
       </div>
-      <div style={{ height: "20px" }} />
+      <div style={{ height: "15px" }} />
       <div className="filters" aria-label="Filtros del portafolio">
         {["todo", "tocatas", "eventos", "backstage"].map((item) => (
           <button
