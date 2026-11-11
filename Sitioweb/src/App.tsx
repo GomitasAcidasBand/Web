@@ -399,7 +399,8 @@ function Portfolio() {
         <span>Portafolio de tocatas + eventos</span>
         <small>{visible.length} ÁLBUMES</small>
       </div>
-      
+      <div
+      </div>
       <div className="filters" aria-label="Filtros del portafolio">
         {["todo", "tocatas", "eventos", "backstage"].map((item) => (
           <button
@@ -554,7 +555,7 @@ export default function App() {
           </button>
 
           <nav className={menuOpen ? "open" : ""}>
-            <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
+            <a href="#blog" onClick={() => setMenuOpen(false)}> VIDEOCLIPS </a>
             <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
             <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
             <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
@@ -562,12 +563,11 @@ export default function App() {
         </header>
 
         <div className="category-strip">
-          <span>POP RUIDOSO</span>
-          <span>DIARIOS</span>
+          <span>MUSICA</span>
           <span>TOCATAS</span>
           <span>FOTOS</span>
-          <span>AMISTAD</span>
-          <span>GLITTER</span>
+          <span>VIDEOCLIPS</span>
+          <span>MERCH</span>
         </div>
 
         <main className="profile-layout">
@@ -1004,7 +1004,7 @@ export default function App() {
               <h2 className="module-title">Acerca de nosotras</h2>
               <div>
                 <span className="huge-heart">♥</span>
-                <p> EDITAR ESTO JEJEJEJE </p>
+                <p> Un refugio de pop ruidoso, guitarras con reverb y amistad. Gomitas Ácidas es el proyecto colaborativo y disidente de Maira, Cata O. y Cata V. Nacidas en Valparaíso/Chile el 2022, transitamos entre el indie pop/rock, dreampop y el shoegaze. XOXO </p>
               </div>
             </section>
           </div>
