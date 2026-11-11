@@ -431,7 +431,7 @@ export default function App() {
                 </p>
               </div>
             </section>
-             </div>
+      
           </div>
         </main>
 
@@ -450,7 +450,6 @@ export default function App() {
           </div>
           <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
         </footer>
-      </div>
-    </div>
+       </div>
   );
 }
