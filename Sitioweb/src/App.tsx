@@ -410,9 +410,9 @@ export default function App() {
        <header className="top-header" id="inicio">
           <a href="#inicio" className="logo">
             <img 
-              src={logo2} 
+              src={logoPersonalizado} 
               alt="Logo Gomitas Ácidas" 
-              style={{ width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover" }} 
+              style={{ width: "65px", height: "65px", borderRadius: "50%", objectFit: "cover" }} 
             />
             <span>
               Gomitas Ácidas<small>power trío de mujeres</small>
