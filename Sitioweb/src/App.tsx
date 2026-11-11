@@ -1,17 +1,30 @@
 
 import { useEffect, useRef, useState } from "react";
-// 1. Importas la imagen desde la carpeta media en src
+// Imágenes
 import mainPortada from "./media1/4.jpg";
 import main1 from "./media1/1.jpg";
 import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
+
+// Canciones del EP "Dulces Sueños" desde src/canciones/
+import cancion1 from "./canciones/despertar.mp3";
+import cancion2 from "./canciones/mariposas.mp3";
+import cancion3 from "./canciones/novolveras.mp3";
+import cancion4 from "./canciones/tragicoamor.mp3";
+
 const images = {
-  // 2. Usas la variable directamente sin comillas
   main: mainPortada,
   singer: main1,
-  band : logo1,
+  band: logo1,
   guitar: logo2,
 };
+
+const epTracks = [
+  { number: "01", title: "Despertar", duration: "03:42", file: cancion1 },
+  { number: "02", title: "Mariposas", duration: "03:15", file: cancion2 },
+  { number: "03", title: "No Volverás", duration: "02:50", file: cancion3 },
+  { number: "04", title: "Trágico Amor", duration: "03:30", file: cancion4 },
+];
 
 const portfolio = [
   {
@@ -116,7 +129,10 @@ function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "
 function MusicPlayer() {
   const audio = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [progress, setProgress] = useState(24);
+  const [progress, setProgress] = useState(0);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+
+  const activeTrack = epTracks[currentTrackIndex];
 
   useEffect(() => {
     const player = audio.current;
@@ -133,22 +149,36 @@ function MusicPlayer() {
 
   const toggle = async () => {
     if (!audio.current) return;
-    if (playing) audio.current.pause();
-    else await audio.current.play();
-    setPlaying(!playing);
+    if (playing) {
+      audio.current.pause();
+      setPlaying(false);
+    } else {
+      await audio.current.play();
+      setPlaying(true);
+    }
+  };
+
+  const changeTrack = async (index: number) => {
+    setCurrentTrackIndex(index);
+    setPlaying(true);
+    setTimeout(async () => {
+      if (audio.current) {
+        await audio.current.play();
+      }
+    }, 100);
   };
 
   return (
     <section className="module music-module" id="musica">
       <audio
         ref={audio}
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        src={activeTrack.file}
         preload="metadata"
       />
-      <h2 className="module-title">Ep "dulces sueños"</h2>
+      <h2 className="module-title">EP "Dulces Sueños"</h2>
       <div className="music-screen">
-        <p>NOW PLAYING:</p>
-        <strong>despertar</strong>
+        <p>NOW PLAYING ({activeTrack.number}/04):</p>
+        <strong>{activeTrack.title}</strong>
         <span>Gomitas Ácidas / 2026</span>
       </div>
       <div
@@ -163,7 +193,13 @@ function MusicPlayer() {
         <i style={{ width: `${progress}%` }} />
       </div>
       <div className="mini-controls">
-        <button aria-label="Canción anterior">
+        <button 
+          aria-label="Canción anterior"
+          onClick={() => {
+            const prevIndex = (currentTrackIndex - 1 + epTracks.length) % epTracks.length;
+            changeTrack(prevIndex);
+          }}
+        >
           <Icon name="prev" />
         </button>
         <button
@@ -173,14 +209,60 @@ function MusicPlayer() {
         >
           <Icon name={playing ? "pause" : "play"} />
         </button>
-        <button aria-label="Canción siguiente">
+        <button 
+          aria-label="Canción siguiente"
+          onClick={() => {
+            const nextIndex = (currentTrackIndex + 1) % epTracks.length;
+            changeTrack(nextIndex);
+          }}
+        >
           <Icon name="next" />
         </button>
-        <span>{playing ? "01:06" : "00:00"} / 03:42</span>
+        <span>{activeTrack.duration}</span>
       </div>
       <div className="equalizer" aria-hidden="true">
         {Array.from({ length: 28 }).map((_, index) => (
           <i key={index} style={{ height: `${7 + ((index * 13) % 25)}px` }} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }) {
+  return (
+    <section className="module ep-section" id="ep-dulces-suenos">
+      <h2 className="module-title">✦ Tracklist: EP "Dulces Sueños" (2026) ✦</h2>
+      <div className="ep-container" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        {epTracks.map((track, index) => (
+          <div
+            key={track.number}
+            onClick={() => onSelectTrack(index)}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px 15px",
+              background: "#fff0f5",
+              border: "1px dashed #ffb6c1",
+              borderRadius: "4px",
+              fontFamily: "monospace",
+              cursor: "pointer",
+            }}
+          >
+            <div>
+              <span style={{ color: "#d1498c", fontWeight: "bold", marginRight: "12px" }}>
+                {track.number}.
+              </span>
+              <span style={{ color: "#333", fontWeight: "600" }}>{track.title}</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+              <span style={{ fontSize: "12px", color: "#777" }}>{track.duration}</span>
+              <span style={{ fontSize: "12px", background: "#ff69b4", color: "#fff", padding: "2px 8px", borderRadius: "4px" }}>
+                ♪ Reproducir
+              </span>
+            </div>
+          </div>
         ))}
       </div>
     </section>
@@ -239,6 +321,14 @@ function Portfolio() {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
+
+  // Función para conectar el listado con el reproductor principal
+  const handleSelectTrack = (index: number) => {
+    const musicModule = document.getElementById("musica");
+    if (musicModule) {
+      musicModule.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="page-background">
@@ -383,6 +473,9 @@ export default function App() {
               </div>
             </section>
 
+            {/* Apartado con el listado de las 4 canciones del EP */}
+            <EpSection onSelectTrack={handleSelectTrack} />
+
             <section className="top-finds module">
               <h2 className="module-title">Top Finds</h2>
               <div className="find-grid">
@@ -430,12 +523,12 @@ export default function App() {
           </div>
         </main>
 
-        <div className="moving-message">
+        <moving-message>
           <div>
             NUEVA EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVA EP
             DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 ·
           </div>
-        </div>
+        </moving-message>
 
         <footer>
           <b>Gomitas Ácidas ★ online since 2026</b>
