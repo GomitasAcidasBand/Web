@@ -488,7 +488,7 @@ export default function App() {
                   <b>IG</b> Instagram
                 </a>
                 <button onClick={() => alert("¡Hola! Por el momento solo atendemos por correo o Instagram jej 💌")}>
-                <b>TK</b> WhatsApp
+                  <b>TK</b> WhatsApp
                 </button>
                 </a>
               </div>
@@ -527,20 +527,6 @@ export default function App() {
               </div>
             </section>
           </aside>
-
-          <div className="main-column">
-            <section className="login-bar module">
-              <span>Member Login</span>
-              <label>
-                E-Mail
-                <input value="gomitasacidasband@gmail.com" readOnly />
-              </label>
-              <label>
-                Password
-                <input value="********" readOnly />
-              </label>
-              <button>LOGIN</button>
-            </section> 
 
             <section className="hero-panel module">
               <div className="hero-art">
