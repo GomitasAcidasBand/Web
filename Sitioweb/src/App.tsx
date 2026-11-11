@@ -408,19 +408,16 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-   <header className="top-header" id="inicio">
+  <header className="top-header" id="inicio">
     <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
       {/* Contenedor circular */}
       <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
-        <img 
-          src={logo1} 
-          alt="Logo Gomitas Ácidas" 
-          style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
-        />
+        <img src={logo1} alt="Logo Gomitas Ácidas" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} />
       </div>
       <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
-        <span style={{ fontSize: "1.75rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
-        <small style={{ fontSize: "0.85rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
+        {/* Título más grande */}
+        <span style={{ fontSize: "2.1rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
+        <small style={{ fontSize: "0.9rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
       </span>
     </a>
     <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}> MENU </button>
