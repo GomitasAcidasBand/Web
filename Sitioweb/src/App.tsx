@@ -490,7 +490,6 @@ export default function App() {
                 <button onClick={() => alert("¡Hola! Por el momento solo atendemos por correo o Instagram jej 💌")}>
                   <b>TK</b> WhatsApp
                 </button>
-                </a>
               </div>
             </section>
 
@@ -528,6 +527,7 @@ export default function App() {
             </section>
           </aside>
 
+          <div className="content-area">
             <section className="hero-panel module">
               <div className="hero-art">
                 <img src={images.singer} alt="Cantante de la banda durante una tocata" />
