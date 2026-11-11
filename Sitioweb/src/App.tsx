@@ -468,6 +468,10 @@ export default function App() {
                 <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
                   <b>IG</b> Instagram
                 </a>
+                {/* Botón de broma de WhatsApp en contactos */}
+                <a href="#whatsapp" onClick={handleWhatsAppJoke}>
+                  <b>WA</b> WhatsApp
+                </a>
               </div>
             </section>
 
@@ -574,7 +578,7 @@ export default function App() {
             <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">Instagram</a> ·{" "}
             <a href="https://www.tiktok.com/@gomitasacidasband" target="_blank" rel="noreferrer">TikTok</a> ·{" "}
             <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ" target="_blank" rel="noreferrer">YouTube Music</a> ·{" "}
-            <a href="#whatsapp" onClick={handleWhatsAppJoke} style={{ cursor: "pointer" }}>WhatsApp</a>
+            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">Spotify</a>
           </div>
           <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
         </footer>
