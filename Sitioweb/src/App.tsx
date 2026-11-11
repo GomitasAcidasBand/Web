@@ -7,7 +7,7 @@ const images = {
   // 2. Usas la variable directamente sin comillas
   main: mainPortada,
   singer: main1,
-  //band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
+  band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
   guitar: "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
   pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
   stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
@@ -292,7 +292,7 @@ export default function App() {
                 <p>
                   <b>Gomitas Ácidas</b>
                   <br />
-                  Ella / Ella / Ella / Ella
+                  Escucha dulces sueños!! ♡
                 </p>
                 <p>Indie pop, dream pop, noise</p>
                 <p>Valparaíso, Chile</p>
@@ -377,11 +377,11 @@ export default function App() {
                 <div className="star-field">✦ · ✧ · ✦</div>
               </div>
               <div className="hero-copy">
-                <p>WELCOME TO OUR SPACE</p>
+                <p>BIENVENIDES A NUESTRA WEB </p>
                 <h2>
-                  Quisiera que esto fuera <em>MySpace</em>
+                  Un blog de  <em>Música</em>
                 </h2>
-                <span>pero con más guitarras, más amigas y muchísimo más rosa.</span>
+                <span>.fotos borrosas y canciones tristes pero rosa jej</span>
                 <a href="#portafolio">VER NUESTROS RECUERDOS &gt;&gt;</a>
               </div>
             </section>
