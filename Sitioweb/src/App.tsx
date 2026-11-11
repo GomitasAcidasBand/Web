@@ -5,7 +5,7 @@ import mainPortada from "./media1/4.jpg";
 import main1 from "./media1/1.jpg";
 import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
-import logoPersonalizado from "./media1/logo.png"; // Tu imagen de logo (ajusta el nombre si es necesario)
+import logoPersonalizado from "./media1/logo.png";
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
@@ -273,7 +273,6 @@ function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }
               </div>
             </div>
 
-            {/* Letra desplegable */}
             {selectedLyricsIndex === index && (
               <div
                 style={{
@@ -392,7 +391,6 @@ export default function App() {
       <div className="site-frame">
         <header className="top-header" id="inicio">
           <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            {/* Contenedor circular */}
             <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
               <img 
                 src={logo1} 
@@ -401,7 +399,6 @@ export default function App() {
               />
             </div>
             <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
-              {/* Título más grande */}
               <span style={{ fontSize: "2.1rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
               <small style={{ fontSize: "0.9rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
             </span>
@@ -466,9 +463,6 @@ export default function App() {
                 </a>
                 <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
                   <b>IG</b> Instagram
-                </a>
-                <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">
-                  <b>TK</b> Spotify
                 </a>
               </div>
             </section>
@@ -566,17 +560,17 @@ export default function App() {
 
         <div className="moving-message">
           <div>
-            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · 
+            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE ·
           </div>
         </div>
 
         <footer>
           <b>Gomitas Ácidas ★ online since 2026</b>
           <div>
-            <a href="https://www.instagram.com/gomitasacidasband/">Instagram</a> ·{" "}
-            <a href="https://www.tiktok.com/@gomitasacidasband">TikTok</a> ·{" "}
-            <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ">YouTube Music</a> ·{" "}
-            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt">Spotify</a>
+            <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">Instagram</a> ·{" "}
+            <a href="https://www.tiktok.com/@gomitasacidasband" target="_blank" rel="noreferrer">TikTok</a> ·{" "}
+            <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ" target="_blank" rel="noreferrer">YouTube Music</a> ·{" "}
+            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">Spotify</a>
           </div>
           <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
         </footer>
