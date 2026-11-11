@@ -385,7 +385,7 @@ function Portfolio() {
   );
 }
 
-// Componente MerchCard con soporte para zoom en ventana flotante (Lightbox)
+// Componente MerchCard con soporte completo para zoom y carrusel
 function MerchCard({ item }: { item: { label: string; images: string[] } }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
