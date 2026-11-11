@@ -413,7 +413,7 @@ export default function App() {
         {/* Contenedor circular */}
         <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff0f5" }}>
           <img 
-            src={logo2} 
+            src={logo5} 
             alt="Logo Gomitas Ácidas" 
             style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.4)", display: "block" }} 
           />
