@@ -530,7 +530,7 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
       
       <div className="site-frame">
-        <header className="top-header" id="inicio">
+        <header className="top-header" id="inicio" style={{ position: "relative" }}>
           <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
             <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
               <img 
@@ -545,17 +545,53 @@ export default function App() {
             </span>
           </a>
 
-          {/* Menú desplegable con icono de rayitas ☰ */}
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú" style={{ fontSize: "24px", background: "none", border: "none", cursor: "pointer", color: "#d1498c" }}>
+          {/* Botón hamburguesa con estilos directos */}
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)} 
+            aria-label="Abrir menú" 
+            style={{ 
+              fontSize: "26px", 
+              background: "#fff0f5", 
+              border: "2px solid #ff69b4", 
+              borderRadius: "6px", 
+              width: "42px", 
+              height: "42px", 
+              cursor: "pointer", 
+              color: "#d1498c",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+            }}
+          >
             ☰
           </button>
 
-          <nav className={menuOpen ? "open" : ""}>
-            <a href="#blog" onClick={() => setMenuOpen(false)}> VIDEOCLIPS </a>
-            <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
-            <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
-            <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
-          </nav>
+          {/* Menú desplegable flotante garantizado por estilo inline */}
+          {menuOpen && (
+            <nav 
+              style={{
+                position: "absolute",
+                top: "115px",
+                right: "15px",
+                background: "#fff0f5",
+                border: "2px solid #ff69b4",
+                borderRadius: "8px",
+                padding: "15px 20px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                zIndex: 9999,
+                boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
+                minWidth: "160px"
+              }}
+            >
+              <a href="#blog" onClick={() => setMenuOpen(false)} style={{ color: "#d1498c", fontWeight: "bold", textDecoration: "none", fontSize: "14px" }}> VIDEOCLIPS </a>
+              <a href="#musica" onClick={() => setMenuOpen(false)} style={{ color: "#d1498c", fontWeight: "bold", textDecoration: "none", fontSize: "14px" }}> MÚSICA </a>
+              <a href="#portafolio" onClick={() => setMenuOpen(false)} style={{ color: "#d1498c", fontWeight: "bold", textDecoration: "none", fontSize: "14px" }}> PORTAFOLIO </a>
+              <a href="#nosotras" onClick={() => setMenuOpen(false)} style={{ color: "#d1498c", fontWeight: "bold", textDecoration: "none", fontSize: "14px" }}> NOSOTRAS </a>
+            </nav>
+          )}
         </header>
 
         <div className="category-strip">
@@ -993,7 +1029,8 @@ export default function App() {
               <h2 className="module-title">Acerca de nosotras</h2>
               <div>
                 <span className="huge-heart">♥</span>
-                <p> Un refugio de pop ruidoso, guitarras con reverb y amistad. Gomitas Ácidas es el proyecto colaborativo y disidente de Maira, Cata O. y Cata V. Nacidas en Valparaíso/Chile el 2022, transitamos entre el indie pop/rock, dreampop y el shoegaze. XOXO </p>
+                <p> ♥ Un refugio de pop ruidoso, guitarras con reverb y amistad. Gomitas Ácidas es el proyecto colaborativo y disidente de Maira, Cata O. y Cata V. Nacidas en Valparaíso/Chile el 2022, transitamos entre el indie pop/rock, dreampop y el shoegaze. XOXO   · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 03.12 ·   Gomitas Ácidas ★ online since 2026
+</p>
               </div>
             </section>
           </div>
