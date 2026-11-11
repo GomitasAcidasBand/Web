@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 // 1. Importas la imagen desde la carpeta media en src
 import mainPortada from "./media1/4.jpg";
-//import singer
+import main1 from "./media1/1.jpg";
 
 const images = {
   // 2. Usas la variable directamente sin comillas
   main: mainPortada,
- // singer: "https://images.unsplash.com/photo-1775196220956-77fdbfca6100?auto=format&fit=crop&w=900&q=85",
+  singer: main1,
   band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
   guitar: "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
   pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
