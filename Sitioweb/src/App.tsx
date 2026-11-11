@@ -20,7 +20,6 @@ const images = {
   singer: main1,
   band: logo1,
   guitar: logo2,
-
   cd: cd,
   cd1: cd1,
   cd2: cd2,
@@ -481,7 +480,7 @@ export default function App() {
           <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
             <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
               <img 
-                src={logoPersonalizado} 
+                src={logo1} 
                 alt="Logo Gomitas Ácidas" 
                 style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
               />
