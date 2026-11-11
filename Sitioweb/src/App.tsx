@@ -408,18 +408,17 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-     <header className="top-header" id="inicio">
+    <header className="top-header" id="inicio">
       <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-        {/* Contenedor circular con el tamaño definitivo del logo */}
-        <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0" }}>
+        {/* Contenedor circular */}
+        <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff0f5" }}>
           <img 
             src={logo2} 
             alt="Logo Gomitas Ácidas" 
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
+            style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.4)", display: "block" }} 
           />
         </div>
         <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
-          {/* Título principal más grande */}
           <span style={{ fontSize: "1.75rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
           <small style={{ fontSize: "0.85rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
         </span>
