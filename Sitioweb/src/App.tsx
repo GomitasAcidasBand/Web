@@ -109,25 +109,25 @@ const portfolio = [
   },
 ];
 
-// 🎞️ Tus 3 Video Clips de YouTube (puedes cambiar los links y las miniaturas cuando quieras)
+// Video clips con su respectiva ID de YouTube para la ventana flotante
 const videoClips = [
   {
     date: "28.08.24",
     title: "No volverás (Official Video)",
-    thumbnail: images.main, // Puedes cambiar por otra imagen o link directo
-    youtubeUrl: "https://www.youtube.com/watch?v=usxv-_zFwwI",
+    thumbnail: images.main,
+    embedId: "usxv-_zFwwI", // ID del video de YouTube que compartiste
   },
   {
     date: "16.08.24",
     title: "Despertar (Live Session)",
     thumbnail: images.singer,
-    youtubeUrl: "https://www.youtube.com/watch?v=usxv-_zFwwI",
+    embedId: "usxv-_zFwwI",
   },
   {
     date: "02.08.24",
     title: "Mariposas (Visualizer)",
     thumbnail: images.band,
-    youtubeUrl: "https://www.youtube.com/watch?v=usxv-_zFwwI",
+    embedId: "usxv-_zFwwI",
   },
 ];
 
@@ -272,7 +272,6 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
         <span>{activeTrack.duration}</span>
       </div>
 
-      {/* Control de Volumen */}
       <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "10px", padding: "0 5px", fontSize: "12px", color: "#d1498c", fontFamily: "monospace" }}>
         <span>🔊</span>
         <input 
@@ -442,6 +441,9 @@ export default function App() {
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
   const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
+  
+  // Estado para la ventanilla flotante de video
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [playingParent, setPlayingParent] = useState(false);
@@ -647,313 +649,4 @@ export default function App() {
                       title="Ver flyer en grande"
                     />
                     <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                        <b style={{ color: "#d1498c", fontSize: "14px" }}>{show.date}</b>
-                        <small style={{ color: "#666" }}>{show.city}</small>
-                      </div>
-                      <span style={{ fontSize: "13px", fontWeight: "bold", color: "#333", margin: "2px 0 6px 0" }}>{show.title}</span>
-                      <a 
-                        href={show.ticketUrl} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        style={{
-                          background: "#ff69b4",
-                          color: "#fff",
-                          textAlign: "center",
-                          padding: "4px 8px",
-                          borderRadius: "4px",
-                          fontSize: "11px",
-                          fontWeight: "bold",
-                          textDecoration: "none",
-                          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                        }}
-                      >
-                        🎟️ Comprar Entradas
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </aside>
-
-          <div className="main-column">
-            <section className="hero-panel module">
-              <div className="hero-art">
-                <img src={images.singer} alt="Cantante de la banda durante una tocata" />
-                <div className="star-field">✦ · ✧ · ✦</div>
-              </div>
-              <div className="hero-copy">
-                <p>BIENVENIDES A NUESTRA WEB </p>
-                <h2> Un blog de  <em>Música</em> </h2>
-                <span>.fotos borrosas y canciones tristes pero rosa jej</span>
-                <a href="#portafolio">VER NUESTROS RECUERDOS &gt;&gt;</a>
-              </div>
-            </section>
-
-            <section className="top-finds module">
-              <h2 className="module-title">❀ MERCH ❀</h2>
-              <div className="find-grid">
-                {mainMerchItems.map((item) => (
-                  <MerchCard key={item.label} item={item} />
-                ))}
-              </div>
-              <div style={{ textAlign: "center", marginTop: "15px" }}>
-                <button
-                  onClick={() => setShowMerchModal(true)}
-                  style={{
-                    background: "#ff69b4",
-                    color: "#fff",
-                    border: "2px dashed #fff",
-                    padding: "8px 16px",
-                    borderRadius: "20px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                    fontFamily: "monospace",
-                    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-                  }}
-                >
-                  ✦ VER MÁS MERCH (ARCHIVOS SECRETOS) ✦
-                </button>
-              </div>
-            </section>
-
-            {/* Ventana Modal de Merch */}
-            {showMerchModal && (
-              <div
-                style={{
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  width: "100vw",
-                  height: "100vh",
-                  background: "rgba(0, 0, 0, 0.6)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  zIndex: 1000,
-                  backdropFilter: "blur(3px)",
-                }}
-              >
-                <div
-                  style={{
-                    background: "#fff0f5",
-                    border: "3px solid #ff69b4",
-                    borderRadius: "12px",
-                    padding: "20px",
-                    width: "90%",
-                    maxWidth: "600px",
-                    maxHeight: "85vh",
-                    overflowY: "auto",
-                    position: "relative",
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  <button
-                    onClick={() => setShowMerchModal(false)}
-                    style={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "12px",
-                      background: "#ff69b4",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: "50%",
-                      width: "30px",
-                      height: "30px",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                      fontSize: "14px",
-                    }}
-                  >
-                    ✕
-                  </button>
-
-                  <h3 style={{ textAlign: "center", color: "#d1498c", marginBottom: "15px", fontFamily: "monospace" }}>
-                    ✦ ARCHIVO COMPLETO DE MERCH ✦
-                  </h3>
-
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
-                    {extraMerchItems.map((item) => (
-                      <MerchCard key={item.label} item={item} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Ventana flotante de Zoom gigante con flechas */}
-            {zoomedData && (
-              <div
-                onClick={() => setZoomedData(null)}
-                style={{
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  width: "100vw",
-                  height: "100vh",
-                  background: "rgba(0, 0, 0, 0.85)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  zIndex: 4000,
-                  backdropFilter: "blur(6px)",
-                }}
-              >
-                <div 
-                  style={{ position: "relative", padding: "20px", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }} 
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={() => setZoomedData(null)}
-                    style={{
-                      position: "absolute",
-                      top: "30px",
-                      right: "30px",
-                      background: "#ff69b4",
-                      color: "#fff",
-                      border: "2px solid #fff",
-                      borderRadius: "50%",
-                      width: "45px",
-                      height: "45px",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                      zIndex: 4020,
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
-                    }}
-                  >
-                    ✕
-                  </button>
-
-                  {zoomedData.images.length > 1 && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setZoomedData((prev) => prev ? { ...prev, index: prev.index === 0 ? prev.images.length - 1 : prev.index - 1 } : null);
-                      }}
-                      style={{
-                        position: "absolute",
-                        left: "30px",
-                        background: "rgba(255,105,180,0.9)",
-                        color: "#fff",
-                        border: "2px solid #fff",
-                        borderRadius: "50%",
-                        width: "50px",
-                        height: "50px",
-                        cursor: "pointer",
-                        fontSize: "22px",
-                        zIndex: 4020,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      ◀
-                    </button>
-                  )}
-
-                  <img
-                    src={zoomedData.images[zoomedData.index]}
-                    alt="Zoom Imagen Grande"
-                    style={{
-                      maxWidth: "85vw",
-                      maxHeight: "88vh",
-                      objectFit: "contain",
-                      borderRadius: "10px",
-                      border: "4px solid #fff",
-                      boxShadow: "0 15px 40px rgba(0,0,0,0.6)",
-                      background: "#000",
-                    }}
-                  />
-
-                  {zoomedData.images.length > 1 && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setZoomedData((prev) => prev ? { ...prev, index: prev.index === prev.images.length - 1 ? 0 : prev.index + 1 } : null);
-                      }}
-                      style={{
-                        position: "absolute",
-                        right: "30px",
-                        background: "rgba(255,105,180,0.9)",
-                        color: "#fff",
-                        border: "2px solid #fff",
-                        borderRadius: "50%",
-                        width: "50px",
-                        height: "50px",
-                        cursor: "pointer",
-                        fontSize: "22px",
-                        zIndex: 4020,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      ▶
-                    </button>
-                  )}
-                </div>
-              </div>
-            )}
-
-            <Portfolio />
-
-            {/* 🎞️ SECCIÓN DE VIDEO CLIPS CON CARÁTULAS Y LINKS A YOUTUBE */}
-            <section className="blog module" id="blog">
-              <h2 className="module-title"> 🎞️ VIDEO CLIPS 🎞️ </h2>
-              {videoClips.map((clip) => (
-                <article key={clip.title} style={{ display: "flex", gap: "12px", alignItems: "center", background: "#fff0f5", padding: "10px", borderRadius: "8px", border: "1px dashed #ffb6c1", marginBottom: "10px" }}>
-                  <a href={clip.youtubeUrl} target="_blank" rel="noreferrer" style={{ position: "relative", display: "block", flexShrink: 0 }}>
-                    <img 
-                      src={clip.thumbnail} 
-                      alt={clip.title} 
-                      style={{ width: "90px", height: "65px", objectFit: "cover", borderRadius: "6px", border: "1px solid #ff69b4" }}
-                    />
-                    <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: "rgba(255,105,180,0.85)", color: "#fff", borderRadius: "50%", width: "26px", height: "26px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px" }}>
-                      ▶
-                    </div>
-                  </a>
-                  <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                    <time style={{ fontSize: "11px", color: "#777" }}>{clip.date}</time>
-                    <h3 style={{ fontSize: "14px", color: "#333", margin: "2px 0" }}>{clip.title}</h3>
-                    <a href={clip.youtubeUrl} target="_blank" rel="noreferrer" style={{ fontSize: "12px", color: "#d1498c", fontWeight: "bold", textDecoration: "none" }}>
-                      [Ver en YouTube ↗]
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </section>
-
-            <section className="about module" id="nosotras">
-              <h2 className="module-title">Acerca de nosotras</h2>
-              <div>
-                <span className="huge-heart">♥</span>
-                <p> EDITAR ESTO JEJEJEJE </p>
-              </div>
-            </section>
-          </div>
-        </main>
-
-        <div className="moving-message">
-          <div>
-            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE ·
-          </div>
-        </div>
-
-        <footer>
-          <b>Gomitas Ácidas ★ online since 2026</b>
-          <div>
-            <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">Instagram</a> ·{" "}
-            <a href="https://www.tiktok.com/@gomitasacidasband" target="_blank" rel="noreferrer">TikTok</a> ·{" "}
-            <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ" target="_blank" rel="noreferrer">YouTube Music</a> ·{" "}
-            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">Spotify</a>
-          </div>
-          <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
-        </footer>
-      </div>
-    </div>
-  );
-}
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems
