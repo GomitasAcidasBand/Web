@@ -111,7 +111,7 @@ const posts = [
   {
     date: "16.08.24",
     title: "Hicimos una canción a las 3:00 AM",
-    text: "Una nota de voz, cuatro cafés y un coro imposible de olvidar.",
+    text: "Una nota de voz, four cafés y un coro imposible de olvidar.",
   },
   {
     date: "02.08.24",
@@ -120,8 +120,8 @@ const posts = [
   },
 ];
 
-// Listas limpias de imágenes para cada producto de Merch
-const merchItems = [
+// Primeros 4 ítems principales que se ven en la sección de Merch
+const mainMerchItems = [
   {
     label: "CD'S",
     images: [images.cd, images.cd1, images.cd2, images.cd3],
@@ -138,6 +138,10 @@ const merchItems = [
     label: "Encendedores",
     images: [images.guitar, images.singer], 
   },
+];
+
+// Ítems adicionales que aparecerán en la ventana flotante (Modal)
+const extraMerchItems = [
   {
     label: "Ositos con chapitas",
     images: [images.main, images.band], 
@@ -430,6 +434,7 @@ function MerchCard({ item }: { item: { label: string; images: string[] } }) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
+  const [showMerchModal, setShowMerchModal] = useState(false); // Estado para abrir/cerrar la ventana de Merch extra
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [playingParent, setPlayingParent] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -608,11 +613,94 @@ export default function App() {
             <section className="top-finds module">
               <h2 className="module-title">❀ MERCH ❀</h2>
               <div className="find-grid">
-                {merchItems.map((item) => (
+                {mainMerchItems.map((item) => (
                   <MerchCard key={item.label} item={item} />
                 ))}
               </div>
+              {/* Botón "Ver más" estilo tienda underground */}
+              <div style={{ textAlign: "center", marginTop: "15px" }}>
+                <button
+                  onClick={() => setShowMerchModal(true)}
+                  style={{
+                    background: "#ff69b4",
+                    color: "#fff",
+                    border: "2px dashed #fff",
+                    padding: "8px 16px",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                    fontFamily: "monospace",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  ✦ VER MÁS MERCH (ARCHIVOS SECRETOS) ✦
+                </button>
+              </div>
             </section>
+
+            {/* Ventana Modal Estilo Zutomayo para ver todo el Merch */}
+            {showMerchModal && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  height: "100vh",
+                  background: "rgba(0, 0, 0, 0.6)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 1000,
+                  backdropFilter: "blur(3px)",
+                }}
+              >
+                <div
+                  style={{
+                    background: "#fff0f5",
+                    border: "3px solid #ff69b4",
+                    borderRadius: "12px",
+                    padding: "20px",
+                    width: "90%",
+                    maxWidth: "600px",
+                    maxHeight: "85vh",
+                    overflowY: "auto",
+                    position: "relative",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <button
+                    onClick={() => setShowMerchModal(false)}
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "12px",
+                      background: "#ff69b4",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "30px",
+                      height: "30px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                    }}
+                  >
+                    ✕
+                  </button>
+
+                  <h3 style={{ textAlign: "center", color: "#d1498c", marginBottom: "15px", fontFamily: "monospace" }}>
+                    ✦ ARCHIVO COMPLETO DE MERCH ✦
+                  </h3>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
+                    {extraMerchItems.map((item) => (
+                      <MerchCard key={item.label} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <Portfolio />
 
