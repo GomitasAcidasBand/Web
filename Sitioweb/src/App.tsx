@@ -158,7 +158,7 @@ const extraMerchItems = [
 const upcomingShows = [
   {
     date: "14.09",
-    title: "Festival Ruidosa",
+    title: "Caja Acústica",
     city: "Santiago",
     flyer: fecha03, 
     ticketUrl: "https://portaldisc.com/evento/cajacusticatresdedic",
