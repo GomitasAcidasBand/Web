@@ -9,9 +9,9 @@ import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
 import cd3 from "./media1/Cd3.png";
 import fecha03 from "./media1/03-12.png";
-import poster1 from "./media1/poster1.png;
-import poster2 from "./media1/poster2.png;
-import poster3 from "./media1/poster3.png;
+import poster1 from "./media1/poster1.png";
+import poster2 from "./media1/poster2.png";
+import poster3 from "./media1/poster3.png";
   
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
