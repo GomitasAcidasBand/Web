@@ -12,7 +12,6 @@ import fecha03 from "./media1/03-12.png";
 import poster1 from "./media1/poster1.png";
 import poster2 from "./media1/poster2.png";
 import poster3 from "./media1/poster3.png";
-  
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
@@ -167,7 +166,7 @@ const upcomingShows = [
     date: "03.12",
     title: "Caja Acústica",
     city: "Santiago",
-    flyer: fecha03, // Aquí está asignado tu nuevo flyer
+    flyer: fecha03,
     ticketUrl: "https://portaldisc.com/evento/cajacusticatresdedic",
   },
  /* {
@@ -211,6 +210,7 @@ function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "
 
 function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTrackEnd, refAudio, onPrev, onNext }: any) {
   const [progress, setProgress] = useState(0);
+  const [volume, setVolume] = useState(1);
   const activeTrack = epTracks[currentTrackIndex];
 
   useEffect(() => {
@@ -230,6 +230,14 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
       player.removeEventListener("ended", handleEnded);
     };
   }, [currentTrackIndex]);
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVol = parseFloat(e.target.value);
+    setVolume(newVol);
+    if (refAudio.current) {
+      refAudio.current.volume = newVol;
+    }
+  };
 
   const toggle = async () => {
     if (!refAudio.current) return;
@@ -273,7 +281,29 @@ function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTra
         </button>
         <span>{activeTrack.duration}</span>
       </div>
-      <div className="equalizer" aria-hidden="true">
+
+      {/* Control de Volumen */}
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "10px", padding: "0 5px", fontSize: "12px", color: "#d1498c", fontFamily: "monospace" }}>
+        <span>🔊</span>
+        <input 
+          type="range" 
+          min="0" 
+          max="1" 
+          step="0.01" 
+          value={volume} 
+          onChange={handleVolumeChange}
+          style={{
+            flex: 1,
+            accentColor: "#ff69b4",
+            cursor: "pointer",
+            height: "4px"
+          }}
+          title="Volumen"
+        />
+        <span>{Math.round(volume * 100)}%</span>
+      </div>
+
+      <div className="equalizer" aria-hidden="true" style={{ marginTop: "8px" }}>
         {Array.from({ length: 28 }).map((_, index) => (
           <i key={index} style={{ height: `${7 + ((index * 13) % 25)}px` }} />
         ))}
@@ -421,8 +451,6 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
-  
-  // Estado para zoom de imágenes
   const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -465,7 +493,6 @@ export default function App() {
     alert("¡Jaja, WhatsApp no es posible! 🚫📱\n\nEscríbenos por Instagram o mándanos un correo a nuestro Gmail para hablar con el power trío ♡");
   };
 
-  // Componente interno MerchCard
   function MerchCard({ item }: { item: { label: string; images: string[] } }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -613,10 +640,10 @@ export default function App() {
               onPrev={handlePrev}
             />
 
-            {/* Tracklist con las letras justo debajo del reproductor */}
+            {/* Tracklist con las letras */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
-            {/* Próximas tocatas con flyer y link */}
+            {/* Próximas tocatas */}
             <section className="module next-shows">
               <h2 className="module-title">Próximas tocatas</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -701,7 +728,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Ventana Modal para ver todo el Merch */}
+            {/* Ventana Modal de Merch */}
             {showMerchModal && (
               <div
                 style={{
