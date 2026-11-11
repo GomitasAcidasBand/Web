@@ -385,121 +385,14 @@ function Portfolio() {
   );
 }
 
-// Componente MerchCard con zoom optimizado en pantalla grande
-function MerchCard({ item }: { item: { label: string; images: string[] } }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
-
-  const handlePrev = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setCurrentIndex((prev) => (prev === 0 ? item.images.length - 1 : prev - 1));
-  };
-
-  const handleNext = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setCurrentIndex((prev) => (prev === item.images.length - 1 ? 0 : prev + 1));
-  };
-
-  return (
-    <>
-      <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", background: "#fff", border: "1px solid #ffb6c1", borderRadius: "6px", padding: "8px" }}>
-        <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-          {item.images.length > 1 && (
-            <button
-              onClick={handlePrev}
-              style={{ position: "absolute", left: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
-              aria-label="Anterior"
-            >
-              ◀
-            </button>
-          )}
-
-          <img 
-            src={item.images[currentIndex]} 
-            alt={item.label} 
-            onClick={() => setZoomedImage(item.images[currentIndex])}
-            style={{ width: "100%", height: "120px", objectFit: "cover", borderRadius: "4px", cursor: "zoom-in" }} 
-            title="Haz clic para ver en grande"
-          />
-
-          {item.images.length > 1 && (
-            <button
-              onClick={handleNext}
-              style={{ position: "absolute", right: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
-              aria-label="Siguiente"
-            >
-              ▶
-            </button>
-          )}
-        </div>
-        <span style={{ marginTop: "6px", fontSize: "13px", fontWeight: "bold", color: "#d1498c" }}>{item.label}</span>
-      </div>
-
-      {/* Ventana flotante de Zoom a gran escala */}
-      {zoomedImage && (
-        <div
-          onClick={() => setZoomedImage(null)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "rgba(0, 0, 0, 0.85)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 3000,
-            backdropFilter: "blur(6px)",
-            cursor: "zoom-out",
-          }}
-        >
-          <div style={{ position: "relative", padding: "20px", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }} onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setZoomedImage(null)}
-              style={{
-                position: "absolute",
-                top: "30px",
-                right: "30px",
-                background: "#ff69b4",
-                color: "#fff",
-                border: "2px solid #fff",
-                borderRadius: "50%",
-                width: "45px",
-                height: "45px",
-                cursor: "pointer",
-                fontWeight: "bold",
-                fontSize: "20px",
-                zIndex: 3010,
-                boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
-              }}
-            >
-              ✕
-            </button>
-            <img
-              src={zoomedImage}
-              alt="Zoom Merch Grande"
-              style={{
-                maxWidth: "92vw",
-                maxHeight: "92vh",
-                objectFit: "contain",
-                borderRadius: "10px",
-                border: "4px solid #fff",
-                boxShadow: "0 15px 40px rgba(0,0,0,0.6)",
-                background: "#000",
-              }}
-            />
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
+  
+  // Estados para el zoom flotante con soporte para carrusel
+  const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [playingParent, setPlayingParent] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -539,6 +432,56 @@ export default function App() {
     e.preventDefault();
     alert("¡Jaja, WhatsApp no es posible! 🚫📱\n\nEscríbenos por Instagram o mándanos un correo a nuestro Gmail para hablar con el power trío ♡");
   };
+
+  // Componente interno MerchCard
+  function MerchCard({ item }: { item: { label: string; images: string[] } }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handlePrevImg = (e: React.MouseEvent) => {
+      e.preventDefault();
+      setCurrentIndex((prev) => (prev === 0 ? item.images.length - 1 : prev - 1));
+    };
+
+    const handleNextImg = (e: React.MouseEvent) => {
+      e.preventDefault();
+      setCurrentIndex((prev) => (prev === item.images.length - 1 ? 0 : prev + 1));
+    };
+
+    return (
+      <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", background: "#fff", border: "1px solid #ffb6c1", borderRadius: "6px", padding: "8px" }}>
+        <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          {item.images.length > 1 && (
+            <button
+              onClick={handlePrevImg}
+              style={{ position: "absolute", left: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              aria-label="Anterior"
+            >
+              ◀
+            </button>
+          )}
+
+          <img 
+            src={item.images[currentIndex]} 
+            alt={item.label} 
+            onClick={() => setZoomedData({ images: item.images, index: currentIndex })}
+            style={{ width: "100%", height: "120px", objectFit: "cover", borderRadius: "4px", cursor: "zoom-in" }} 
+            title="Haz clic para ver en grande"
+          />
+
+          {item.images.length > 1 && (
+            <button
+              onClick={handleNextImg}
+              style={{ position: "absolute", right: "2px", zIndex: 5, background: "rgba(255,105,180,0.8)", color: "#fff", border: "none", borderRadius: "50%", width: "24px", height: "24px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              aria-label="Siguiente"
+            >
+              ▶
+            </button>
+          )}
+        </div>
+        <span style={{ marginTop: "6px", fontSize: "13px", fontWeight: "bold", color: "#d1498c" }}>{item.label}</span>
+      </div>
+    );
+  }
 
   return (
     <div className="page-background">
@@ -762,6 +705,127 @@ export default function App() {
                       <MerchCard key={item.label} item={item} />
                     ))}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Ventana flotante de Zoom gigante con flechas de carrusel */}
+            {zoomedData && (
+              <div
+                onClick={() => setZoomedData(null)}
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  height: "100vh",
+                  background: "rgba(0, 0, 0, 0.85)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 4000,
+                  backdropFilter: "blur(6px)",
+                }}
+              >
+                <div 
+                  style={{ position: "relative", padding: "20px", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }} 
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Botón Cerrar */}
+                  <button
+                    onClick={() => setZoomedData(null)}
+                    style={{
+                      position: "absolute",
+                      top: "30px",
+                      right: "30px",
+                      background: "#ff69b4",
+                      color: "#fff",
+                      border: "2px solid #fff",
+                      borderRadius: "50%",
+                      width: "45px",
+                      height: "45px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                      zIndex: 4020,
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    ✕
+                  </button>
+
+                  {/* Flecha Izquierda del Zoom */}
+                  {zoomedData.images.length > 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setZoomedData((prev) => prev ? { ...prev, index: prev.index === 0 ? prev.images.length - 1 : prev.index - 1 } : null);
+                      }}
+                      style={{
+                        position: "absolute",
+                        left: "30px",
+                        background: "rgba(255,105,180,0.9)",
+                        color: "#fff",
+                        border: "2px solid #fff",
+                        borderRadius: "50%",
+                        width: "50px",
+                        height: "50px",
+                        cursor: "pointer",
+                        fontSize: "22px",
+                        zIndex: 4020,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                      }}
+                    >
+                      ◀
+                    </button>
+                  )}
+
+                  {/* Imagen Grande en Zoom */}
+                  <img
+                    src={zoomedData.images[zoomedData.index]}
+                    alt="Zoom Carrusel Grande"
+                    style={{
+                      maxWidth: "85vw",
+                      maxHeight: "88vh",
+                      objectFit: "contain",
+                      borderRadius: "10px",
+                      border: "4px solid #fff",
+                      boxShadow: "0 15px 40px rgba(0,0,0,0.6)",
+                      background: "#000",
+                    }}
+                  />
+
+                  {/* Flecha Derecha del Zoom */}
+                  {zoomedData.images.length > 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setZoomedData((prev) => prev ? { ...prev, index: prev.index === prev.images.length - 1 ? 0 : prev.index + 1 } : null);
+                      }}
+                      style={{
+                        position: "absolute",
+                        right: "30px",
+                        background: "rgba(255,105,180,0.9)",
+                        color: "#fff",
+                        border: "2px solid #fff",
+                        borderRadius: "50%",
+                        width: "50px",
+                        height: "50px",
+                        cursor: "pointer",
+                        fontSize: "22px",
+                        zIndex: 4020,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                      }}
+                    >
+                      ▶
+                    </button>
+                  )}
                 </div>
               </div>
             )}
