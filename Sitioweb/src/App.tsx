@@ -12,11 +12,6 @@ import cancion2 from "./canciones/mariposas.mp3";
 import cancion3 from "./canciones/novolveras.mp3";
 import cancion4 from "./canciones/tragicoamor.mp3";
 
-//Logo link sitio web 
-<a href="/">
-  <img src="/./media1/2.png" alt="Logo Gomitas Ácidas" />
-</a>
-
 const images = {
   main: mainPortada,
   singer: main1,
