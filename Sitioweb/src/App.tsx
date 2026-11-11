@@ -19,26 +19,26 @@ const images = {
 };
 
 const epTracks = [
-  { 
+   { 
     number: "01", 
-    title: "Despertar", 
-    duration: "03:42", 
+    title: "No Volverás", 
+    duration: "02:50", 
     file: cancion1,
-    lyrics: "Abro los ojos y el cielo está rosado...\nYa no hay tiempo para mirar atrás,\nsolo queda avanzar oyendo este ruido.\n(Despertar, despertar...)"
+    lyrics: "Te miro, intento\ncomprender que no regresarás.\nTe pienso todo el tiempo\npero sé que ya no volverás.\nYo solo quiero escapar\nde esta mierda de soledad,\ny quizás, encontrar\nla respuesta a esta casualidad."
   },
   { 
     number: "02", 
-    title: "Mariposas", 
-    duration: "03:15", 
+    title: "Despertar", 
+    duration: "03:42", 
     file: cancion2,
-    lyrics: "Vuelan sin rumbo por la habitación,\nvidrios rotos y una vieja canción.\nTus ojos tristes bajo la luz de neón,\nhicieron eco en mi corazón."
+    lyrics: "Abro los ojos y el cielo está rosado...\nYa no hay tiempo para mirar atrás,\nsolo queda avanzar oyendo este ruido.\n(Despertar, despertar...)"
   },
   { 
     number: "03", 
-    title: "No Volverás", 
-    duration: "02:50", 
+    title: "Mariposas", 
+    duration: "03:15", 
     file: cancion3,
-    lyrics: "Guardé las fotos en el cajón de abajo,\nlas guitarras suenan fuerte hoy.\nYa no duele tu voz al teléfono,\nsolo soy yo y este gran descontrol."
+    lyrics: "Vuelan sin rumbo por la habitación,\nvidrios rotos y una vieja canción.\nTus ojos tristes bajo la luz de neón,\nhicieron eco en mi corazón."
   },
   { 
     number: "04", 
