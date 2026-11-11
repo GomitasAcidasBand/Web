@@ -8,6 +8,7 @@ import cd from "./media1/Cd.png";
 import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
 import cd3 from "./media1/Cd3.png";
+import fecha03 from "./media1/03-12.png";
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
@@ -151,6 +152,30 @@ const extraMerchItems = [
   {
     label: "Stickers",
     images: [images.band, images.main, images.singer], 
+  },
+];
+
+const upcomingShows = [
+  {
+    date: "14.09",
+    title: "Festival Ruidosa",
+    city: "Santiago",
+    flyer: fecha03, // Aquí está asignado tu nuevo flyer
+    ticketUrl: "https://www.passline.com",
+  },
+  {
+    date: "28.09",
+    title: "Club Subterráneo",
+    city: "Providencia",
+    flyer: images.singer,
+    ticketUrl: "https://www.puntoticket.com",
+  },
+  {
+    date: "12.10",
+    title: "Feria En Órbita",
+    city: "Valparaíso",
+    flyer: images.band,
+    ticketUrl: "https://www.passline.com",
   },
 ];
 
@@ -389,6 +414,8 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
+  
+  // Estado para zoom de imágenes
   const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -431,6 +458,7 @@ export default function App() {
     alert("¡Jaja, WhatsApp no es posible! 🚫📱\n\nEscríbenos por Instagram o mándanos un correo a nuestro Gmail para hablar con el power trío ♡");
   };
 
+  // Componente interno MerchCard
   function MerchCard({ item }: { item: { label: string; images: string[] } }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -578,26 +606,49 @@ export default function App() {
               onPrev={handlePrev}
             />
 
-            {/* Tracklist con las letras */}
+            {/* Tracklist con las letras justo debajo del reproductor */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
-            {/* Próximas tocatas originales (con tus líneas comentadas si quieres o tus 3 de siempre) */}
+            {/* Próximas tocatas con flyer y link */}
             <section className="module next-shows">
               <h2 className="module-title">Próximas tocatas</h2>
-              <div>
-                <b>14.09</b>
-                <span>Festival Ruidosa</span>
-                <small>Santiago</small>
-              </div>
-              <div>
-                <b>28.09</b>
-                <span>Club Subterráneo</span>
-                <small>Providencia</small>
-              </div>
-              <div>
-                <b>12.10</b>
-                <span>Feria En Órbita</span>
-                <small>Valparaíso</small>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {upcomingShows.map((show, idx) => (
+                  <div key={idx} style={{ background: "#fff", border: "1px solid #ffb6c1", borderRadius: "8px", padding: "10px", display: "flex", gap: "10px", alignItems: "center" }}>
+                    <img 
+                      src={show.flyer} 
+                      alt={show.title}
+                      onClick={() => setZoomedData({ images: [show.flyer], index: 0 })}
+                      style={{ width: "55px", height: "55px", objectFit: "cover", borderRadius: "6px", cursor: "zoom-in", border: "1px solid #ff69b4" }}
+                      title="Ver flyer en grande"
+                    />
+                    <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                        <b style={{ color: "#d1498c", fontSize: "14px" }}>{show.date}</b>
+                        <small style={{ color: "#666" }}>{show.city}</small>
+                      </div>
+                      <span style={{ fontSize: "13px", fontWeight: "bold", color: "#333", margin: "2px 0 6px 0" }}>{show.title}</span>
+                      <a 
+                        href={show.ticketUrl} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        style={{
+                          background: "#ff69b4",
+                          color: "#fff",
+                          textAlign: "center",
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          fontSize: "11px",
+                          fontWeight: "bold",
+                          textDecoration: "none",
+                          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                        }}
+                      >
+                        🎟️ Comprar Entradas
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           </aside>
@@ -643,7 +694,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Ventana Modal de Merch */}
+            {/* Ventana Modal para ver todo el Merch */}
             {showMerchModal && (
               <div
                 style={{
@@ -850,7 +901,6 @@ export default function App() {
           </div>
         </main>
 
-        {/* 🌟 BANNER INFERIOR CON TU MENSAJE ORIGINAL */}
         <div className="moving-message">
           <div>
             · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE ·
