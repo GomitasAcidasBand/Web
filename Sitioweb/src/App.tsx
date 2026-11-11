@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const images = {
-  main: "https://images.unsplash.com/photo-1759682237602-73418f678009?auto=format&fit=crop&w=1000&q=85",
+  main: "./main/5.webp",
   singer:
     "https://images.unsplash.com/photo-1775196220956-77fdbfca6100?auto=format&fit=crop&w=900&q=85",
   band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
