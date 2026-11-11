@@ -407,9 +407,13 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-        <header className="top-header" id="inicio">
+       <header className="top-header" id="inicio">
           <a href="#inicio" className="logo">
-            <span className="logo-mark">LF</span>
+            <img 
+              src={logo2} 
+              alt="Logo Gomitas Ácidas" 
+              style={{ width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover" }} 
+            />
             <span>
               Gomitas Ácidas<small>power trío de mujeres</small>
             </span>
