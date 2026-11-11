@@ -69,28 +69,28 @@ const portfolio = [
     title: "titulo",
     place: "lugar",
     date: "fecha",
-    type: "eventos", // puede ser backstage y eventos 
+    type: "eventos",
     image: images.logo1,
   },
   {
     title: "titulo",
     place: "lugar",
     date: "fecha",
-    type: "backstage", // puede ser backstage y eventos 
-    image: images.logo1,
-  },
- {
-    title: "titulo",
-    place: "lugar",
-    date: "fecha",
-    type: "eventos", // puede ser backstage y eventos 
+    type: "backstage",
     image: images.logo1,
   },
   {
     title: "titulo",
     place: "lugar",
     date: "fecha",
-    type: "backstage", // puede ser backstage y eventos 
+    type: "eventos",
+    image: images.logo1,
+  },
+  {
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "backstage",
     image: images.logo1,
   },
   {
@@ -104,13 +104,12 @@ const portfolio = [
     title: "titulo",
     place: "lugar",
     date: "fecha",
-    type: "eventos", // puede ser backstage y eventos 
+    type: "eventos",
     image: images.logo1,
   },
 ];
 
-// Video clips con su respectiva ID de YouTube para la ventana flotante
-const videoClips = [ 
+const videoClips = [
   {
     date: "15.10.2026",
     title: "Mariposas (Official Video)",
@@ -121,7 +120,7 @@ const videoClips = [
     date: "06.11.2026",
     title: "No volverás (Official Video)",
     thumbnail: "https://img.youtube.com/vi/usxv-_zFwwI/hqdefault.jpg",
-    embedId: "usxv-_zFwwI", // ID del video de YouTube que compartiste
+    embedId: "usxv-_zFwwI",
   },
   {
     date: "06.11.2026",
@@ -129,13 +128,12 @@ const videoClips = [
     thumbnail: "https://img.youtube.com/vi/AjWMq2OSemM/hqdefault.jpg",
     embedId: "AjWMq2OSemM",
   },
- 
 ];
 
 const mainMerchItems = [
   {
     label: "CD'S",
-    images: [images.cd, images.cd1, images.cd2, images.cd3], // cambiar fotos CD 
+    images: [images.cd, images.cd1, images.cd2, images.cd3],
   },
   {
     label: "Poleras",
@@ -143,26 +141,26 @@ const mainMerchItems = [
   },
   {
     label: "Posters",
-    images: [images.poster1, images.poster2, images.poster3], 
+    images: [images.poster1, images.poster2, images.poster3],
   },
   {
     label: "Encendedores",
-    images: [images.logo1], 
+    images: [images.logo1],
   },
 ];
 
 const extraMerchItems = [
   {
     label: "Ositos con chapitas",
-    images: [images.logo1], 
+    images: [images.logo1],
   },
   {
     label: "Chapitas",
-    images: [images.logo1], 
+    images: [images.logo1],
   },
   {
     label: "Stickers",
-    images: [images.logo1], 
+    images: [images.logo1],
   },
 ];
 
@@ -435,8 +433,6 @@ export default function App() {
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
   const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
-  
-  // Estado para la ventanilla flotante de video
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -549,7 +545,6 @@ export default function App() {
             </span>
           </a>
 
-          {/* Botón con las rayitas comunes ☰ */}
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú" style={{ fontSize: "24px", background: "none", border: "none", cursor: "pointer", color: "#d1498c" }}>
             ☰
           </button>
@@ -615,7 +610,6 @@ export default function App() {
               </div>
             </section>
 
-            {/* Reproductor de música */}
             <MusicPlayer
               currentTrackIndex={currentTrackIndex}
               playingParent={playingParent}
@@ -626,10 +620,8 @@ export default function App() {
               onPrev={handlePrev}
             />
 
-            {/* Tracklist con las letras */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
-            {/* Próximos eventos */}
             <section className="module next-shows">
               <h2 className="module-title">Próximos eventos</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -714,7 +706,6 @@ export default function App() {
               </div>
             </section>
 
-            {/* Ventana Modal de Merch */}
             {showMerchModal && (
               <div
                 style={{
@@ -778,7 +769,6 @@ export default function App() {
               </div>
             )}
 
-            {/* Ventana flotante de Zoom gigante con flechas */}
             {zoomedData && (
               <div
                 onClick={() => setZoomedData(null)}
@@ -895,7 +885,6 @@ export default function App() {
               </div>
             )}
 
-            {/* 📺 VENTANA FLOTANTE PARA REPRODUCIR VIDEO CLIPS */}
             {activeVideoId && (
               <div
                 onClick={() => setActiveVideoId(null)}
@@ -967,7 +956,6 @@ export default function App() {
 
             <Portfolio />
 
-            {/* 🎞️ SECCIÓN DE VIDEO CLIPS CON APERTURA EN VENTANA FLOTANTE */}
             <section className="blog module" id="blog">
               <h2 className="module-title"> 🎞️ VIDEO CLIPS 🎞️ </h2>
               {videoClips.map((clip) => (
