@@ -23,6 +23,10 @@ const images = {
   band: logo1,
   guitar: logo2,
   customLogo: logoPersonalizado,
+  cd: cd,
+  cd1: cd1,
+  cd2: cd2,
+  cd3: cd3,
 };
 
 const epTracks = [
