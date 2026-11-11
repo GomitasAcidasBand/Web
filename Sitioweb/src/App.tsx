@@ -487,8 +487,9 @@ export default function App() {
                 <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
                   <b>IG</b> Instagram
                 </a>
-                <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">
-                  <b>TK</b> Spotify
+                <button onClick={() => alert("¡Hola! Por el momento solo atendemos por correo o Instagram jej 💌")}>
+                <b>TK</b> WhatsApp
+                </button>
                 </a>
               </div>
             </section>
