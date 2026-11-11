@@ -411,7 +411,7 @@ export default function App() {
         <header className="top-header" id="inicio">
           <a href="#inicio" className="logo">
             <img 
-              src={logoPersonalizado} 
+              src={logo2} 
               alt="Logo Gomitas Ácidas" 
               style={{ width: "65px", height: "65px", borderRadius: "50%", objectFit: "cover" }} 
             />
