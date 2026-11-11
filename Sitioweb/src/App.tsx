@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+
+      import { useEffect, useRef, useState } from "react";
 
 // Imágenes
 import mainPortada from "./media1/4.jpg";
