@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from "react";
+// 1. Importas la imagen desde la carpeta media en src
+import mainImage from "./media/5.webp";
 
 const images = {
-  main: "./main/5.webp",
-  singer:
-    "https://images.unsplash.com/photo-1775196220956-77fdbfca6100?auto=format&fit=crop&w=900&q=85",
+  // 2. Usas la variable directamente sin comillas
+  main: mainImage,
+  singer: "https://images.unsplash.com/photo-1775196220956-77fdbfca6100?auto=format&fit=crop&w=900&q=85",
   band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
-  guitar:
-    "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
+  guitar: "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
   pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
-  stage:
-    "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
+  stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
 };
+
+const portfolio = [
+  {
+    title: "Festival Ruido Rosa",
+    place: "Santiago, Chile",
+    date: "24 AGO 2024",
+    type: "tocatas",
+    image: images.main,
+  },
 
 const portfolio = [
   {
