@@ -25,7 +25,6 @@ const images = {
   cd1: cd1,
   cd2: cd2,
   cd3: cd3,
-  flyer1:fecha03,
 };
 
 const epTracks = [
@@ -154,6 +153,30 @@ const extraMerchItems = [
     label: "Stickers",
     images: [images.band, images.main, images.singer], 
   },
+];
+// FLYER CON LINKKKKS
+const upcomingShows = [
+  {
+    date: "14.09",
+    title: "Festival Ruidosa",
+    city: "Santiago",
+    flyer: fecha03, 
+    ticketUrl: "https://portaldisc.com/evento/cajacusticatresdedic",
+  },
+ /* {
+    date: "",
+    title: "",
+    city: "",
+    flyer: images.singer,
+    ticketUrl: "",
+  },
+  {
+    date: "0",
+    title: "Feria En Órbita",
+    city: "Valparaíso",
+    flyer: images.band,
+    ticketUrl: "https://www.passline.com",
+  },*/
 ];
 
 function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "mail" }) {
@@ -392,7 +415,7 @@ export default function App() {
   const [friend, setFriend] = useState(false);
   const [showMerchModal, setShowMerchModal] = useState(false);
   
-  // Estados para el zoom flotante con soporte para carrusel
+  // Estado para zoom de imágenes
   const [zoomedData, setZoomedData] = useState<{ images: string[]; index: number } | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -586,22 +609,46 @@ export default function App() {
             {/* Tracklist con las letras justo debajo del reproductor */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
+            {/* Próximas tocatas con flyer y link */}
             <section className="module next-shows">
               <h2 className="module-title">Próximas tocatas</h2>
-              <div>
-                <b>14.09</b>
-                <span>Festival Ruidosa</span>
-                <small>Santiago</small>
-              </div>
-              <div>
-                <b>28.09</b>
-                <span>Club Subterráneo</span>
-                <small>Providencia</small>
-              </div>
-              <div>
-                <b>12.10</b>
-                <span>Feria En Órbita</span>
-                <small>Valparaíso</small>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {upcomingShows.map((show, idx) => (
+                  <div key={idx} style={{ background: "#fff", border: "1px solid #ffb6c1", borderRadius: "8px", padding: "10px", display: "flex", gap: "10px", alignItems: "center" }}>
+                    <img 
+                      src={show.flyer} 
+                      alt={show.title}
+                      onClick={() => setZoomedData({ images: [show.flyer], index: 0 })}
+                      style={{ width: "55px", height: "55px", objectFit: "cover", borderRadius: "6px", cursor: "zoom-in", border: "1px solid #ff69b4" }}
+                      title="Ver flyer en grande"
+                    />
+                    <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                        <b style={{ color: "#d1498c", fontSize: "14px" }}>{show.date}</b>
+                        <small style={{ color: "#666" }}>{show.city}</small>
+                      </div>
+                      <span style={{ fontSize: "13px", fontWeight: "bold", color: "#333", margin: "2px 0 6px 0" }}>{show.title}</span>
+                      <a 
+                        href={show.ticketUrl} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        style={{
+                          background: "#ff69b4",
+                          color: "#fff",
+                          textAlign: "center",
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          fontSize: "11px",
+                          fontWeight: "bold",
+                          textDecoration: "none",
+                          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                        }}
+                      >
+                        🎟️ Comprar Entradas ★★★★
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           </aside>
@@ -647,7 +694,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Ventana Modal Estilo Zutomayo para ver todo el Merch */}
+            {/* Ventana Modal para ver todo el Merch */}
             {showMerchModal && (
               <div
                 style={{
@@ -711,7 +758,7 @@ export default function App() {
               </div>
             )}
 
-            {/* Ventana flotante de Zoom gigante con flechas de carrusel */}
+            {/* Ventana flotante de Zoom gigante con flechas */}
             {zoomedData && (
               <div
                 onClick={() => setZoomedData(null)}
@@ -733,7 +780,6 @@ export default function App() {
                   style={{ position: "relative", padding: "20px", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }} 
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Botón Cerrar */}
                   <button
                     onClick={() => setZoomedData(null)}
                     style={{
@@ -756,7 +802,6 @@ export default function App() {
                     ✕
                   </button>
 
-                  {/* Flecha Izquierda del Zoom */}
                   {zoomedData.images.length > 1 && (
                     <button
                       onClick={(e) => {
@@ -785,10 +830,9 @@ export default function App() {
                     </button>
                   )}
 
-                  {/* Imagen Grande en Zoom */}
                   <img
                     src={zoomedData.images[zoomedData.index]}
-                    alt="Zoom Carrusel Grande"
+                    alt="Zoom Imagen Grande"
                     style={{
                       maxWidth: "85vw",
                       maxHeight: "88vh",
@@ -800,7 +844,6 @@ export default function App() {
                     }}
                   />
 
-                  {/* Flecha Derecha del Zoom */}
                   {zoomedData.images.length > 1 && (
                     <button
                       onClick={(e) => {
