@@ -109,21 +109,25 @@ const portfolio = [
   },
 ];
 
-const posts = [
+// 🎞️ Tus 3 Video Clips de YouTube (puedes cambiar los links y las miniaturas cuando quieras)
+const videoClips = [
   {
     date: "28.08.24",
-    title: "Lo que pasó después de apagar las luces",
-    text: "Fotos borrosas, delineador corrido y la playlist camino al hotel.",
+    title: "No volverás (Official Video)",
+    thumbnail: images.main, // Puedes cambiar por otra imagen o link directo
+    youtubeUrl: "https://www.youtube.com/watch?v=usxv-_zFwwI",
   },
   {
     date: "16.08.24",
-    title: "Hicimos una canción a las 3:00 AM",
-    text: "Una nota de voz, cuatro cafés y un coro imposible de olvidar.",
+    title: "Despertar (Live Session)",
+    thumbnail: images.singer,
+    youtubeUrl: "https://www.youtube.com/watch?v=usxv-_zFwwI",
   },
   {
     date: "02.08.24",
-    title: "El carrete completo del verano rosa",
-    text: "Las fotos que sí subimos y las que casi se quedan en la cámara.",
+    title: "Mariposas (Visualizer)",
+    thumbnail: images.band,
+    youtubeUrl: "https://www.youtube.com/watch?v=usxv-_zFwwI",
   },
 ];
 
@@ -169,20 +173,6 @@ const upcomingShows = [
     flyer: fecha03,
     ticketUrl: "https://portaldisc.com/evento/cajacusticatresdedic",
   },
- /* {
-    date: "28.09",
-    title: "Club Subterráneo",
-    city: "Providencia",
-    flyer: images.singer,
-    ticketUrl: "https://www.puntoticket.com",
-  },
-  {
-    date: "12.10",
-    title: "Feria En Órbita",
-    city: "Valparaíso",
-    flyer: images.band,
-    ticketUrl: "https://www.passline.com",
-  },*/
 ];
 
 function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "mail" }) {
@@ -911,16 +901,28 @@ export default function App() {
 
             <Portfolio />
 
+            {/* 🎞️ SECCIÓN DE VIDEO CLIPS CON CARÁTULAS Y LINKS A YOUTUBE */}
             <section className="blog module" id="blog">
-              <h2 className="module-title"> Gomitas Ácidas' Latest Blog Entries </h2>
-              {posts.map((post) => (
-                <article key={post.title}>
-                  <time>{post.date}</time>
-                  <div>
-                    <h3>{post.title}</h3>
-                    <p>{post.text}</p>
+              <h2 className="module-title"> 🎞️ VIDEO CLIPS 🎞️ </h2>
+              {videoClips.map((clip) => (
+                <article key={clip.title} style={{ display: "flex", gap: "12px", alignItems: "center", background: "#fff0f5", padding: "10px", borderRadius: "8px", border: "1px dashed #ffb6c1", marginBottom: "10px" }}>
+                  <a href={clip.youtubeUrl} target="_blank" rel="noreferrer" style={{ position: "relative", display: "block", flexShrink: 0 }}>
+                    <img 
+                      src={clip.thumbnail} 
+                      alt={clip.title} 
+                      style={{ width: "90px", height: "65px", objectFit: "cover", borderRadius: "6px", border: "1px solid #ff69b4" }}
+                    />
+                    <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: "rgba(255,105,180,0.85)", color: "#fff", borderRadius: "50%", width: "26px", height: "26px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px" }}>
+                      ▶
+                    </div>
+                  </a>
+                  <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                    <time style={{ fontSize: "11px", color: "#777" }}>{clip.date}</time>
+                    <h3 style={{ fontSize: "14px", color: "#333", margin: "2px 0" }}>{clip.title}</h3>
+                    <a href={clip.youtubeUrl} target="_blank" rel="noreferrer" style={{ fontSize: "12px", color: "#d1498c", fontWeight: "bold", textDecoration: "none" }}>
+                      [Ver en YouTube ↗]
+                    </a>
                   </div>
-                  <a href="#blog">[leer más]</a>
                 </article>
               ))}
             </section>
