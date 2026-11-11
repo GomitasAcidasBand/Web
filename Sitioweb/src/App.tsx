@@ -6,9 +6,9 @@ import logo1 from "./media1/5.png";
 import logo2 from "./media1/2.png";
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
-import cancion1 from "./canciones/despertar.mp3";
-import cancion2 from "./canciones/mariposas.mp3";
-import cancion3 from "./canciones/novolveras.mp3";
+import cancion1 from "./canciones/novolveras.mp3";
+import cancion2 from "./canciones/despertar.mp3";
+import cancion3 from "./canciones/mariposas.mp3";
 import cancion4 from "./canciones/tragicoamor.mp3";
 
 const images = {
