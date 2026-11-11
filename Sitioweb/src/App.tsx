@@ -431,6 +431,7 @@ export default function App() {
                 </p>
               </div>
             </section>
+             </div>
           </div>
         </main>
 
