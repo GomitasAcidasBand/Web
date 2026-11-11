@@ -10,7 +10,6 @@ import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
 import cd3 from "./media1/Cd3.png";
 
-
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
 import cancion2 from "./canciones/mariposas.mp3";
@@ -123,15 +122,15 @@ const posts = [
   },
 ];
 
-// Listas de imágenes para cada producto de Merch (puedes agregar más rutas aquí según tus archivos)
+// Listas de imágenes para cada producto de Merch
 const merchItems = [
   {
     label: "CD'S",
-    images: [images.cd, images.cd1, images.cd2, images.cd3], // Reemplaza con tus imágenes de CD
+    images: [images.cd, images.cd1, images.cd2, images.cd3],
   },
   {
     label: "Poleras",
-    images: [images.singer, images.band, images.main], // Reemplaza con tus imágenes de poleras
+    images: [images.singer, images.band, images.main],
   },
   {
     label: "Posters",
@@ -439,4 +438,229 @@ export default function App() {
   const [playingParent, setPlayingParent] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const handleSelectTrack = async (index
+  const handleSelectTrack = async (index: number) => {
+    setCurrentTrackIndex(index);
+    setPlayingParent(true);
+    setTimeout(async () => {
+      if (audioRef.current) {
+        await audioRef.current.play();
+      }
+    }, 100);
+  };
+
+  const handleTrackEnd = async () => {
+    const nextIndex = (currentTrackIndex + 1) % epTracks.length;
+    setCurrentTrackIndex(nextIndex);
+    setPlayingParent(true);
+    setTimeout(async () => {
+      if (audioRef.current) {
+        await audioRef.current.play();
+      }
+    }, 100);
+  };
+
+  const handleNext = () => {
+    const nextIndex = (currentTrackIndex + 1) % epTracks.length;
+    handleSelectTrack(nextIndex);
+  };
+
+  const handlePrev = () => {
+    const prevIndex = (currentTrackIndex - 1 + epTracks.length) % epTracks.length;
+    handleSelectTrack(prevIndex);
+  };
+
+  const handleWhatsAppJoke = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert("¡Jaja, WhatsApp no es posible! 🚫📱\n\nEscríbenos por Instagram o mándanos un correo a nuestro Gmail para hablar con el power trío ♡");
+  };
+
+  return (
+    <div className="page-background">
+      <div className="floating-shape shape-one">✦</div>
+      <div className="floating-shape shape-two">♥</div>
+
+      <div className="site-frame">
+        <header className="top-header" id="inicio">
+          <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+            <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+              <img 
+                src={logoPersonalizado} 
+                alt="Logo Gomitas Ácidas" 
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
+              />
+            </div>
+            <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
+              <span style={{ fontSize: "2.1rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
+              <small style={{ fontSize: "0.9rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
+            </span>
+          </a>
+
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+            MENU
+          </button>
+
+          <nav className={menuOpen ? "open" : ""}>
+            <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
+            <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
+            <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
+            <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
+          </nav>
+        </header>
+
+        <div className="category-strip">
+          <span>POP RUIDOSO</span>
+          <span>DIARIOS</span>
+          <span>TOCATAS</span>
+          <span>FOTOS</span>
+          <span>AMISTAD</span>
+          <span>GLITTER</span>
+        </div>
+
+        <main className="profile-layout">
+          <aside className="sidebar">
+            <section className="profile-card module">
+              <h1>@gomitasacidasband</h1>
+              <div className="profile-photo">
+                <img src={images.main} alt="Las integrantes de la banda cantando en vivo" />
+                <span> Escucha dulces sueños!! ♡ </span>
+              </div>
+              <div className="profile-facts">
+                <p>Gomitas Ácidas</p>
+                <p>Indie pop, dream pop, noise</p>
+                <p>Valparaíso, Chile</p>
+                <p>Último login: hoy</p>
+              </div>
+            </section>
+
+            <section className="mood-box module">
+              <p>
+                <b>Mood:</b> creativas XD
+              </p>
+              <div className="butterfly-card">
+                <span>✦</span>
+                <strong> CHICAS <br /> DEL INTERNET </strong>
+                <span>✦</span>
+              </div>
+            </section>
+
+            <section className="module contact-box">
+              <h2 className="module-title">Contactar a Gomitas Ácidas</h2>
+              <div className="contact-grid">
+                <button onClick={() => setFriend(!friend)}>
+                  <Icon name="heart" /> {friend ? "Amigas!" : "Agregar"}
+                </button>
+                <a href="mailto:gomitasacidasband@gmail.com">
+                  <Icon name="mail" /> Mensaje
+                </a>
+                <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
+                  <b>IG</b> Instagram
+                </a>
+                <a href="#whatsapp" onClick={handleWhatsAppJoke}>
+                  <b>WA</b> WhatsApp
+                </a>
+              </div>
+            </section>
+
+            {/* Reproductor de música */}
+            <MusicPlayer
+              currentTrackIndex={currentTrackIndex}
+              playingParent={playingParent}
+              setPlayingParent={setPlayingParent}
+              onTrackEnd={handleTrackEnd}
+              refAudio={audioRef}
+              onNext={handleNext}
+              onPrev={handlePrev}
+            />
+
+            {/* Tracklist con las letras justo debajo del reproductor */}
+            <EpSection onSelectTrack={handleSelectTrack} />
+
+            <section className="module next-shows">
+              <h2 className="module-title">Próximas tocatas</h2>
+              <div>
+                <b>14.09</b>
+                <span>Festival Ruidosa</span>
+                <small>Santiago</small>
+              </div>
+              <div>
+                <b>28.09</b>
+                <span>Club Subterráneo</span>
+                <small>Providencia</small>
+              </div>
+              <div>
+                <b>12.10</b>
+                <span>Feria En Órbita</span>
+                <small>Valparaíso</small>
+              </div>
+            </section>
+          </aside>
+
+          <div className="main-column">
+            <section className="hero-panel module">
+              <div className="hero-art">
+                <img src={images.singer} alt="Cantante de la banda durante una tocata" />
+                <div className="star-field">✦ · ✧ · ✦</div>
+              </div>
+              <div className="hero-copy">
+                <p>BIENVENIDES A NUESTRA WEB </p>
+                <h2> Un blog de  <em>Música</em> </h2>
+                <span>.fotos borrosas y canciones tristes pero rosa jej</span>
+                <a href="#portafolio">VER NUESTROS RECUERDOS &gt;&gt;</a>
+              </div>
+            </section>
+
+            <section className="top-finds module">
+              <h2 className="module-title">❀ MERCH ❀</h2>
+              <div className="find-grid">
+                {merchItems.map((item) => (
+                  <MerchCard key={item.label} item={item} />
+                ))}
+              </div>
+            </section>
+
+            <Portfolio />
+
+            <section className="blog module" id="blog">
+              <h2 className="module-title"> Gomitas Ácidas' Latest Blog Entries </h2>
+              {posts.map((post) => (
+                <article key={post.title}>
+                  <time>{post.date}</time>
+                  <div>
+                    <h3>{post.title}</h3>
+                    <p>{post.text}</p>
+                  </div>
+                  <a href="#blog">[leer más]</a>
+                </article>
+              ))}
+            </section>
+
+            <section className="about module" id="nosotras">
+              <h2 className="module-title">Acerca de nosotras</h2>
+              <div>
+                <span className="huge-heart">♥</span>
+                <p> EDITAR ESTO JEJEJEJE </p>
+              </div>
+            </section>
+          </div>
+        </main>
+
+        <div className="moving-message">
+          <div>
+            · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVO EP DISPONIBLE ·
+          </div>
+        </div>
+
+        <footer>
+          <b>Gomitas Ácidas ★ online since 2026</b>
+          <div>
+            <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">Instagram</a> ·{" "}
+            <a href="https://www.tiktok.com/@gomitasacidasband" target="_blank" rel="noreferrer">TikTok</a> ·{" "}
+            <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ" target="_blank" rel="noreferrer">YouTube Music</a> ·{" "}
+            <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">Spotify</a>
+          </div>
+          <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
+        </footer>
+      </div>
+    </div>
+  );
+}
