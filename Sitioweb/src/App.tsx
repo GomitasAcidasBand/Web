@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 // 1. Importas la imagen desde la carpeta media en src
-import mainImage from "./media/5.webp";
+import mainImage from "./media1/5.jpg";
 
 const images = {
   // 2. Usas la variable directamente sin comillas
