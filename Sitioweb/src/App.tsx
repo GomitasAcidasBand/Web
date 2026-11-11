@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 // Imágenes
 import mainPortada from "./media1/4.jpg";
@@ -20,10 +19,34 @@ const images = {
 };
 
 const epTracks = [
-  { number: "01", title: "Despertar", duration: "03:42", file: cancion1 },
-  { number: "02", title: "Mariposas", duration: "03:15", file: cancion2 },
-  { number: "03", title: "No Volverás", duration: "02:50", file: cancion3 },
-  { number: "04", title: "Trágico Amor", duration: "03:30", file: cancion4 },
+  { 
+    number: "01", 
+    title: "Despertar", 
+    duration: "03:42", 
+    file: cancion1,
+    lyrics: "Abro los ojos y el cielo está rosado...\nYa no hay tiempo para mirar atrás,\nsolo queda avanzar oyendo este ruido.\n(Despertar, despertar...)"
+  },
+  { 
+    number: "02", 
+    title: "Mariposas", 
+    duration: "03:15", 
+    file: cancion2,
+    lyrics: "Vuelan sin rumbo por la habitación,\nvidrios rotos y una vieja canción.\nTus ojos tristes bajo la luz de neón,\nhicieron eco en mi corazón."
+  },
+  { 
+    number: "03", 
+    title: "No Volverás", 
+    duration: "02:50", 
+    file: cancion3,
+    lyrics: "Guardé las fotos en el cajón de abajo,\nlas guitarras suenan fuerte hoy.\nYa no duele tu voz al teléfono,\nsolo soy yo y este gran descontrol."
+  },
+  { 
+    number: "04", 
+    title: "Trágico Amor", 
+    duration: "03:30", 
+    file: cancion4,
+    lyrics: "Un drama pop en blanco y negro,\ncorriendo tarde bajo la lluvia en invierno.\nEras perfecto para un final abierto,\npero prefiero seguir tocando este instrumento."
+  },
 ];
 
 const portfolio = [
@@ -126,52 +149,40 @@ function Icon({ name }: { name: "play" | "pause" | "prev" | "next" | "heart" | "
   );
 }
 
-function MusicPlayer() {
-  const audio = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
+function MusicPlayer({ currentTrackIndex, setPlayingParent, playingParent, onTrackEnd, refAudio }: any) {
   const [progress, setProgress] = useState(0);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-
   const activeTrack = epTracks[currentTrackIndex];
 
   useEffect(() => {
-    const player = audio.current;
+    const player = refAudio.current;
     if (!player) return;
     const update = () => setProgress((player.currentTime / (player.duration || 1)) * 100);
-    const stop = () => setPlaying(false);
+    const handleEnded = () => {
+      onTrackEnd(); // Pasa automáticamente a la siguiente canción en orden
+    };
     player.addEventListener("timeupdate", update);
-    player.addEventListener("ended", stop);
+    player.addEventListener("ended", handleEnded);
     return () => {
       player.removeEventListener("timeupdate", update);
-      player.removeEventListener("ended", stop);
+      player.removeEventListener("ended", handleEnded);
     };
-  }, []);
+  }, [currentTrackIndex]);
 
   const toggle = async () => {
-    if (!audio.current) return;
-    if (playing) {
-      audio.current.pause();
-      setPlaying(false);
+    if (!refAudio.current) return;
+    if (playingParent) {
+      refAudio.current.pause();
+      setPlayingParent(false);
     } else {
-      await audio.current.play();
-      setPlaying(true);
+      await refAudio.current.play();
+      setPlayingParent(true);
     }
-  };
-
-  const changeTrack = async (index: number) => {
-    setCurrentTrackIndex(index);
-    setPlaying(true);
-    setTimeout(async () => {
-      if (audio.current) {
-        await audio.current.play();
-      }
-    }, 100);
   };
 
   return (
     <section className="module music-module" id="musica">
       <audio
-        ref={audio}
+        ref={refAudio}
         src={activeTrack.file}
         preload="metadata"
       />
@@ -184,38 +195,26 @@ function MusicPlayer() {
       <div
         className="mini-progress"
         onClick={(event) => {
-          if (!audio.current?.duration) return;
+          if (!refAudio.current?.duration) return;
           const rect = event.currentTarget.getBoundingClientRect();
-          audio.current.currentTime =
-            ((event.clientX - rect.left) / rect.width) * audio.current.duration;
+          refAudio.current.currentTime =
+            ((event.clientX - rect.left) / rect.width) * refAudio.current.duration;
         }}
       >
         <i style={{ width: `${progress}%` }} />
       </div>
       <div className="mini-controls">
-        <button 
-          aria-label="Canción anterior"
-          onClick={() => {
-            const prevIndex = (currentTrackIndex - 1 + epTracks.length) % epTracks.length;
-            changeTrack(prevIndex);
-          }}
-        >
+        <button aria-label="Canción anterior">
           <Icon name="prev" />
         </button>
         <button
           className="main-control"
           onClick={toggle}
-          aria-label={playing ? "Pausar" : "Reproducir"}
+          aria-label={playingParent ? "Pausar" : "Reproducir"}
         >
-          <Icon name={playing ? "pause" : "play"} />
+          <Icon name={playingParent ? "pause" : "play"} />
         </button>
-        <button 
-          aria-label="Canción siguiente"
-          onClick={() => {
-            const nextIndex = (currentTrackIndex + 1) % epTracks.length;
-            changeTrack(nextIndex);
-          }}
-        >
+        <button aria-label="Canción siguiente">
           <Icon name="next" />
         </button>
         <span>{activeTrack.duration}</span>
@@ -230,38 +229,84 @@ function MusicPlayer() {
 }
 
 function EpSection({ onSelectTrack }: { onSelectTrack: (index: number) => void }) {
+  const [selectedLyricsIndex, setSelectedLyricsIndex] = useState<number | null>(null);
+
   return (
     <section className="module ep-section" id="ep-dulces-suenos">
       <h2 className="module-title">✦ Tracklist: EP "Dulces Sueños" (2026) ✦</h2>
-      <div className="ep-container" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <div className="ep-container" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {epTracks.map((track, index) => (
           <div
             key={track.number}
-            onClick={() => onSelectTrack(index)}
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "10px 15px",
+              padding: "12px 15px",
               background: "#fff0f5",
               border: "1px dashed #ffb6c1",
-              borderRadius: "4px",
+              borderRadius: "6px",
               fontFamily: "monospace",
-              cursor: "pointer",
             }}
           >
-            <div>
-              <span style={{ color: "#d1498c", fontWeight: "bold", marginRight: "12px" }}>
-                {track.number}.
-              </span>
-              <span style={{ color: "#333", fontWeight: "600" }}>{track.title}</span>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div 
+                onClick={() => onSelectTrack(index)} 
+                style={{ cursor: "pointer", display: "flex", alignItems: "center", flex: 1 }}
+              >
+                <span style={{ color: "#d1498c", fontWeight: "bold", marginRight: "12px" }}>
+                  {track.number}.
+                </span>
+                <span style={{ color: "#333", fontWeight: "600" }}>{track.title}</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <span style={{ fontSize: "12px", color: "#777" }}>{track.duration}</span>
+                <button
+                  onClick={() => setSelectedLyricsIndex(selectedLyricsIndex === index ? null : index)}
+                  style={{
+                    fontSize: "11px",
+                    background: "#ffb6c1",
+                    color: "#fff",
+                    border: "none",
+                    padding: "4px 10px",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {selectedLyricsIndex === index ? "Ocultar Letra" : "Ver Letra ✍️"}
+                </button>
+                <button
+                  onClick={() => onSelectTrack(index)}
+                  style={{
+                    fontSize: "11px",
+                    background: "#ff69b4",
+                    color: "#fff",
+                    border: "none",
+                    padding: "4px 10px",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ♪ Play
+                </button>
+              </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-              <span style={{ fontSize: "12px", color: "#777" }}>{track.duration}</span>
-              <span style={{ fontSize: "12px", background: "#ff69b4", color: "#fff", padding: "2px 8px", borderRadius: "4px" }}>
-                ♪ Reproducir
-              </span>
-            </div>
+
+            {/* Desplegable de la letra */}
+            {selectedLyricsIndex === index && (
+              <div style={{
+                marginTop: "12px",
+                padding: "10px",
+                background: "#ffffff",
+                border: "1px solid #ff69b4",
+                borderRadius: "4px",
+                whiteSpace: "pre-line",
+                fontSize: "13px",
+                color: "#444",
+                fontStyle: "italic"
+              }}>
+                {track.lyrics}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -321,224 +366,13 @@ function Portfolio() {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [friend, setFriend] = useState(false);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [playingParent, setPlayingParent] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Función para conectar el listado con el reproductor principal
-  const handleSelectTrack = (index: number) => {
-    const musicModule = document.getElementById("musica");
-    if (musicModule) {
-      musicModule.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  return (
-    <div className="page-background">
-      <div className="floating-shape shape-one">✦</div>
-      <div className="floating-shape shape-two">♥</div>
-
-      <div className="site-frame">
-        <header className="top-header" id="inicio">
-          <a href="#inicio" className="logo">
-            <span className="logo-mark">LF</span>
-            <span>
-              Gomitas Ácidas<small>power trío de mujeres</small>
-            </span>
-          </a>
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-            MENU
-          </button>
-          <nav className={menuOpen ? "open" : ""}>
-            <a href="#blog" onClick={() => setMenuOpen(false)}>
-              BLOG
-            </a>
-            <a href="#musica" onClick={() => setMenuOpen(false)}>
-              MÚSICA
-            </a>
-            <a href="#portafolio" onClick={() => setMenuOpen(false)}>
-              PORTAFOLIO
-            </a>
-            <a href="#nosotras" onClick={() => setMenuOpen(false)}>
-              NOSOTRAS
-            </a>
-          </nav>
-        </header>
-
-        <div className="category-strip"> 
-          <span>POP RUIDOSO</span>
-          <span>DIARIOS</span>
-          <span>TOCATAS</span>
-          <span>FOTOS</span>
-          <span>AMISTAD</span>
-          <span>GLITTER</span>
-        </div>
-
-        <main className="profile-layout">
-          <aside className="sidebar">
-            <section className="profile-card module">
-              <h1>@gomitasacidasband</h1>
-              <div className="profile-photo">
-                <img src={images.main} alt="Las integrantes de la banda cantando en vivo" />
-                <span> Escucha dulces sueños!! ♡ </span>
-              </div>
-              <div className="profile-facts">
-                <p>Gomitas Ácidas</p>
-                <p>Indie pop, dream pop, noise</p>
-                <p>Valparaíso, Chile</p>
-                <p>Último login: hoy</p>
-              </div>
-            </section>
-
-            <section className="mood-box module">
-              <p>
-                <b>Mood:</b> creativas XD
-              </p>
-              <div className="butterfly-card">
-                <span>✦</span>
-                <strong>
-                  CHICAS
-                  <br />
-                  DEL INTERNET
-                </strong>
-                <span>✦</span>
-              </div>
-            </section>
-
-            <section className="module contact-box">
-              <h2 className="module-title">Contactar a Gomitas Ácidas</h2>
-              <div className="contact-grid">
-                <button onClick={() => setFriend(!friend)}>
-                  <Icon name="heart" />
-                  {friend ? "Amigas!" : "Agregar"}
-                </button>
-                <a href="mailto:gomitasacidasband@gmail.com">
-                  <Icon name="mail" />
-                  Mensaje
-                </a>
-                <a href="https://www.instagram.com/gomitasacidasband/" target="_blank" rel="noreferrer">
-                  <b>IG</b> Instagram
-                </a>
-                <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt" target="_blank" rel="noreferrer">
-                  <b>TK</b> Spotify
-                </a>
-              </div>
-            </section>
-
-            <MusicPlayer />
-
-            <section className="module next-shows">
-              <h2 className="module-title">Próximas tocatas</h2>
-              <div>
-                <b>14.09</b>
-                <span>Festival Ruidosa</span>
-                <small>Santiago</small>
-              </div>
-              <div>
-                <b>28.09</b>
-                <span>Club Subterráneo</span>
-                <small>Providencia</small>
-              </div>
-              <div>
-                <b>12.10</b>
-                <span>Feria En Órbita</span>
-                <small>Valparaíso</small>
-              </div>
-            </section>
-          </aside>
-
-          <div className="main-column">
-            <section className="login-bar module">
-              <span>Member Login</span>
-              <label>
-                E-Mail
-                <input value="gomitasacidasband@gmail.com" readOnly />
-              </label>
-              <label>
-                Password
-                <input value="********" readOnly />
-              </label>
-              <button>LOGIN</button>
-            </section> 
-
-            <section className="hero-panel module">
-              <div className="hero-art">
-                <img src={images.singer} alt="Cantante de la banda durante una tocata" />
-                <div className="star-field">✦ · ✧ · ✦</div>
-              </div>
-              <div className="hero-copy">
-                <p>BIENVENIDES A NUESTRA WEB </p>
-                <h2>
-                  Un blog de  <em>Música</em>
-                </h2>
-                <span>.fotos borrosas y canciones tristes pero rosa jej</span>
-                <a href="#portafolio">VER NUESTROS RECUERDOS &gt;&gt;</a>
-              </div>
-            </section>
-
-            {/* Apartado con el listado de las 4 canciones del EP */}
-            <EpSection onSelectTrack={handleSelectTrack} />
-
-            <section className="top-finds module">
-              <h2 className="module-title">Top Finds</h2>
-              <div className="find-grid">
-                {[
-                  [images.band, "ya parece"],
-                  [images.main, "tocatas"],
-                  [images.guitar, "canciones"],
-                  [images.singer, "amistad"],
-                ].map(([image, label]) => (
-                  <a href="#portafolio" key={label}>
-                    <img src={image} alt="" />
-                    <span>{label}</span>
-                  </a>
-                ))}
-              </div>
-            </section>
-
-            <Portfolio />
-
-            <section className="blog module" id="blog">
-              <h2 className="module-title">
-                Gomitas Ácidas' Latest Blog Entries
-              </h2>
-              {posts.map((post) => (
-                <article key={post.title}>
-                  <time>{post.date}</time>
-                  <div>
-                    <h3>{post.title}</h3>
-                    <p>{post.text}</p>
-                  </div>
-                  <a href="#blog">[leer más]</a>
-                </article>
-              ))}
-            </section>
-
-            <section className="about module" id="nosotras">
-              <h2 className="module-title">Acerca de nosotras</h2>
-              <div>
-                <span className="huge-heart">♥</span>
-                <p>
-                  EDITAR ESTO JEJEJEJE
-                </p>
-              </div>
-            </section>
-          </div>
-        </main>
-
-        <moving-message>
-          <div>
-            NUEVA EP DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 · NUEVA EP
-            DISPONIBLE · DULCES SUEÑOS · PRÓXIMA TOCATA 20.12 ·
-          </div>
-        </moving-message>
-
-        <footer>
-          <b>Gomitas Ácidas ★ online since 2026</b>
-          <div>
-            <a href="https://www.instagram.com/gomitasacidasband/">Instagram</a> · <a href="https://www.tiktok.com/@gomitasacidasband">TikTok</a>{" "}
-            · <a href="https://music.youtube.com/channel/UCKvMjhecKcWIOYxsQrPjhhQ">YouTube Music</a> · <a href="https://open.spotify.com/intl-es/artist/6q7wZHn3kDxlRLOADXM2Qt">Spotify</a>
-          </div>
-          <span>© 2026 GOMITAS ÁCIDAS — HECHO CON CARIÑO </span>
-        </footer>
-      </div>
-    </div>
-  );
-}
+  // Cambiar y reproducir al hacer click en una canción de la lista
+  const handleSelectTrack = async (index: number) => {
+    setCurrentTrackIndex(index);
+    setPlayingParent(true);
+    setTimeout(async () => {
+      if (audioRef.
