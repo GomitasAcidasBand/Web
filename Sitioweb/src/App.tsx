@@ -22,8 +22,8 @@ import cancion4 from "./canciones/tragicoamor.mp3";
 const images = {
   main: mainPortada,
   singer: main1,
-  band: logo1,
-  guitar: logo2,
+  logo1: logo1,
+  logo2: logo2,
   cd: cd,
   cd1: cd1,
   cd2: cd2,
@@ -66,32 +66,32 @@ const epTracks = [
 
 const portfolio = [
   {
-    title: "Festival Ruido Rosa",
-    place: "Santiago, Chile",
-    date: "24 AGO 2024",
-    type: "tocatas",
-    image: images.main,
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "eventos", // puede ser backstage y eventos 
+    image: images.logo2,
   },
   {
-    title: "Sesión medianoche",
-    place: "Estudio 13",
-    date: "09 JUL 2024",
-    type: "backstage",
-    image: images.guitar,
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "backstage", // puede ser backstage y eventos 
+    image: images.logo2,
+  },
+ {
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "eventos", // puede ser backstage y eventos 
+    image: images.logo2,
   },
   {
-    title: "Club Saturno",
-    place: "Valparaíso, Chile",
-    date: "21 JUN 2024",
-    type: "tocatas",
-    image: images.singer,
-  },
-  {
-    title: "Feria Chicas Ruidosas",
-    place: "Centro Cultural",
-    date: "18 MAY 2024",
-    type: "eventos",
-    image: images.band,
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "backstage", // puede ser backstage y eventos 
+    image: images.logo2,
   },
   {
     title: "Noche de lanzamiento",
@@ -101,11 +101,11 @@ const portfolio = [
     image: images.singer,
   },
   {
-    title: "Antes del show",
-    place: "Camerino 02",
-    date: "15 MAR 2024",
-    type: "backstage",
-    image: images.band,
+    title: "titulo",
+    place: "lugar",
+    date: "fecha",
+    type: "eventos", // puede ser backstage y eventos 
+    image: images.logo2,
   },
 ];
 
@@ -396,12 +396,12 @@ function Portfolio() {
   return (
     <section className="portfolio module" id="portafolio">
       <div className="module-title portfolio-title">
-        <span>Portafolio de tocatas + eventos</span>
+        <span>Portafolio de eventos</span>
         <small>{visible.length} ÁLBUMES</small>
       </div>
       <div style={{ height: "15px" }} />
       <div className="filters" aria-label="Filtros del portafolio">
-        {["todo", "tocatas", "eventos", "backstage"].map((item) => (
+        {["todo", "eventos", "backstage"].map((item) => (
           <button
             key={item}
             className={filter === item ? "active" : ""}
@@ -563,7 +563,7 @@ export default function App() {
 
         <div className="category-strip">
           <span>MUSICA</span>
-          <span>TOCATAS</span>
+          <span>EVENTOS</span>
           <span>FOTOS</span>
           <span>VIDEOCLIPS</span>
           <span>MERCH</span>
@@ -628,9 +628,9 @@ export default function App() {
             {/* Tracklist con las letras */}
             <EpSection onSelectTrack={handleSelectTrack} />
 
-            {/* Próximas tocatas */}
+            {/* Próximos eventos */}
             <section className="module next-shows">
-              <h2 className="module-title">Próximas tocatas</h2>
+              <h2 className="module-title">Próximos eventos</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 {upcomingShows.map((show, idx) => (
                   <div key={idx} style={{ background: "#fff", border: "1px solid #ffb6c1", borderRadius: "8px", padding: "10px", display: "flex", gap: "10px", alignItems: "center" }}>
@@ -708,7 +708,7 @@ export default function App() {
                     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
                   }}
                 >
-                  ✦ VER MÁS MERCH (ARCHIVOS SECRETOS) ✦
+                  ✦ VER MÁS MERCH ✦
                 </button>
               </div>
             </section>
