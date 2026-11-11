@@ -7,10 +7,10 @@ const images = {
   // 2. Usas la variable directamente sin comillas
   main: mainPortada,
   singer: main1,
-  band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
-  guitar: "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
-  pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
-  stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
+  //band: "https://images.unsplash.com/photo-1770571414030-65cd870919f2?auto=format&fit=crop&w=1000&q=85",
+  //guitar: "https://images.unsplash.com/photo-1787360504836-bea531d4f265?auto=format&fit=crop&w=900&q=85",
+  //pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
+  //stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
 };
 
 const portfolio = [
@@ -147,8 +147,8 @@ function MusicPlayer() {
       <h2 className="module-title">Ep "dulces sueños"</h2>
       <div className="music-screen">
         <p>NOW PLAYING:</p>
-        <strong>Corazón de plástico</strong>
-        <span>Gomitas Ácidas / 2025</span>
+        <strong>despertar</strong>
+        <span>Gomitas Ácidas / 2026</span>
       </div>
       <div
         className="mini-progress"
@@ -249,7 +249,7 @@ export default function App() {
           <a href="#inicio" className="logo">
             <span className="logo-mark">LF</span>
             <span>
-              lasfurias<small>una banda para las girls y los theys</small>
+              Gomitas Ácidas<small>power trío de mujeres</small>
             </span>
           </a>
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
@@ -271,7 +271,8 @@ export default function App() {
           </nav>
         </header>
 
-        <div className="category-strip">
+        {/* TENEMOS QUE MODIFICAR ESO  */}
+        <div className="category-strip"> 
           <span>POP RUIDOSO</span>
           <span>DIARIOS</span>
           <span>TOCATAS</span>
@@ -286,14 +287,10 @@ export default function App() {
               <h1>@lasfurias</h1>
               <div className="profile-photo">
                 <img src={images.main} alt="Las integrantes de la banda cantando en vivo" />
-                <span>ONLINE NOW!</span>
+                <span> Escucha dulces sueños!! ♡ </span>
               </div>
               <div className="profile-facts">
-                <p>
-                  <b>Gomitas Ácidas</b>
-                  <br />
-                  Escucha dulces sueños!! ♡
-                </p>
+                <p>Gomitas Ácidas</p>
                 <p>Indie pop, dream pop, noise</p>
                 <p>Valparaíso, Chile</p>
                 <p>Último login: hoy</p>
