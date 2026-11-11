@@ -409,15 +409,15 @@ export default function App() {
 
       <div className="site-frame">
       <header className="top-header" id="inicio">
-        <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
           <img 
             src={logo2} 
             alt="Logo Gomitas Ácidas" 
-            style={{ width: "110px", height: "110px", borderRadius: "50%", objectFit: "cover" }} 
+            style={{ width: "95px", height: "95px", borderRadius: "50%", objectFit: "cover", border: "2px solid #ff69b4" }} 
           />
-          <span style={{ display: "flex", flexDirection: "column" }}> 
-            <span style={{ fontSize: "1.6rem", fontWeight: "bold", lineHeight: "1.1" }}>Gomitas Ácidas</span>
-            <small style={{ fontSize: "0.9rem", marginTop: "4px" }}>power trío de mujeres</small> 
+          <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
+            <span style={{ fontSize: "1.35rem", fontWeight: "bold", lineHeight: "1.15", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
+            <small style={{ fontSize: "0.85rem", marginTop: "3px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
           </span>
         </a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}> MENU </button>
