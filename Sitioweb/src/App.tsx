@@ -408,29 +408,29 @@ export default function App() {
       <div className="floating-shape shape-two">♥</div>
 
       <div className="site-frame">
-    <header className="top-header" id="inicio">
-      <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-        {/* Contenedor circular */}
-        <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff0f5" }}>
-          <img 
-            src={logo5} 
-            alt="Logo Gomitas Ácidas" 
-            style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.4)", display: "block" }} 
-          />
-        </div>
-        <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
-          <span style={{ fontSize: "1.75rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
-          <small style={{ fontSize: "0.85rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
-        </span>
-      </a>
-      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}> MENU </button>
-      <nav className={menuOpen ? "open" : ""}>
-        <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
-        <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
-        <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
-        <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
-      </nav>
-    </header>
+   <header className="top-header" id="inicio">
+    <a href="#inicio" className="logo" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+      {/* Contenedor circular */}
+      <div style={{ width: "105px", height: "105px", borderRadius: "50%", overflow: "hidden", border: "2px solid #ff69b4", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+        <img 
+          src={logo1} 
+          alt="Logo Gomitas Ácidas" 
+          style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: "4px" }} 
+        />
+      </div>
+      <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}> 
+        <span style={{ fontSize: "1.75rem", fontWeight: "bold", lineHeight: "1.1", letterSpacing: "-0.5px" }}>Gomitas Ácidas</span>
+        <small style={{ fontSize: "0.85rem", marginTop: "4px", opacity: "0.85", fontStyle: "italic" }}>power trío de mujeres</small> 
+      </span>
+    </a>
+    <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}> MENU </button>
+    <nav className={menuOpen ? "open" : ""}>
+      <a href="#blog" onClick={() => setMenuOpen(false)}> BLOG </a>
+      <a href="#musica" onClick={() => setMenuOpen(false)}> MÚSICA </a>
+      <a href="#portafolio" onClick={() => setMenuOpen(false)}> PORTAFOLIO </a>
+      <a href="#nosotras" onClick={() => setMenuOpen(false)}> NOSOTRAS </a>
+    </nav>
+  </header>
 
         <div className="category-strip"> 
           <span>POP RUIDOSO</span>
