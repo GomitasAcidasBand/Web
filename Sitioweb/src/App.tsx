@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 // 1. Importas la imagen desde la carpeta media en src
-import mainImage from "./media1/5.jpg";
+import mainImage from "./media1/1.jpg";
 
 const images = {
   // 2. Usas la variable directamente sin comillas
@@ -11,7 +11,6 @@ const images = {
   pink: "https://images.unsplash.com/photo-1776099028245-6f21821c9cb0?auto=format&fit=crop&w=900&q=85",
   stage: "https://images.unsplash.com/photo-1785747759215-6b5394318147?auto=format&fit=crop&w=1000&q=85",
 };
-
 
 const portfolio = [
   {
@@ -57,7 +56,6 @@ const portfolio = [
     image: images.band,
   },
 ];
-
 const posts = [
   {
     date: "28.08.24",
