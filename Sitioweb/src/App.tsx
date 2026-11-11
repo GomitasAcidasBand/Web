@@ -399,8 +399,7 @@ function Portfolio() {
         <span>Portafolio de tocatas + eventos</span>
         <small>{visible.length} ÁLBUMES</small>
       </div>
-      <div
-      </div>
+      <div style={{ height: "20px" }} />
       <div className="filters" aria-label="Filtros del portafolio">
         {["todo", "tocatas", "eventos", "backstage"].map((item) => (
           <button
