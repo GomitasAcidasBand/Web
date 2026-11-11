@@ -9,6 +9,10 @@ import cd1 from "./media1/Cd1.png";
 import cd2 from "./media1/Cd2.png";
 import cd3 from "./media1/Cd3.png";
 import fecha03 from "./media1/03-12.png";
+import poster1 from "./media1/poster1.png;
+import poster2 from "./media1/poster2.png;
+import poster3 from "./media1/poster3.png;
+  
 
 // Canciones del EP "Dulces Sueños" desde src/canciones/
 import cancion1 from "./canciones/despertar.mp3";
@@ -25,6 +29,9 @@ const images = {
   cd1: cd1,
   cd2: cd2,
   cd3: cd3,
+  poster1: poster1,
+  poster2: poster2,
+  poster3: poster3,
 };
 
 const epTracks = [
@@ -132,7 +139,7 @@ const mainMerchItems = [
   },
   {
     label: "Posters",
-    images: [images.band, images.main], 
+    images: [images.poster1, images.poster2, images.poster3], 
   },
   {
     label: "Encendedores",
@@ -157,11 +164,11 @@ const extraMerchItems = [
 
 const upcomingShows = [
   {
-    date: "14.09",
+    date: "03.12",
     title: "Caja Acústica",
     city: "Santiago",
     flyer: fecha03, // Aquí está asignado tu nuevo flyer
-    ticketUrl: "https://www.passline.com",
+    ticketUrl: "https://portaldisc.com/evento/cajacusticatresdedic",
   },
  /* {
     date: "28.09",
