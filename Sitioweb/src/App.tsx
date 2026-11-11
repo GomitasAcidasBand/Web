@@ -124,7 +124,7 @@ const videoClips = [
   },
   {
     date: "06.11.2026",
-    title: "Despertar (Official Video)",
+    title: "Trágico amor (Official Video)",
     thumbnail: "https://img.youtube.com/vi/AjWMq2OSemM/hqdefault.jpg",
     embedId: "AjWMq2OSemM",
   },
