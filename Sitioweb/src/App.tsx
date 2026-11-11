@@ -413,10 +413,10 @@ export default function App() {
             <img 
               src={logo2} 
               alt="Logo Gomitas Ácidas" 
-              style={{ width: "65px", height: "65px", borderRadius: "70%", objectFit: "cover" }} 
+              style={{ width: "65px", height: "65px", borderRadius: "50%", objectFit: "cover" }} 
             />
-            <span>
-              Gomitas Ácidas<small>power trío de mujeres</small>
+            <span> 
+              Gomitas Ácidas<small>power trío de mujeres</small> 
             </span>
           </a>
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
